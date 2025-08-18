@@ -1,19 +1,19 @@
 ---
 layout: base
-title: I'm [Your Full Name]
+title: I'm Anish Gupta
 hide: true
 ---
 
 ### Me and Team
 
-Hi! My name is [Your Full Name].
+Hi! My name is Anish Gupta.
 
-| Role         | Name     | Repo Location                       | Stream                | Repo Name |
-|--------------|----------|-------------------------------------|-----------------------|-----------|
-| Scrum Master | John     | github.com/jm1021/student           | upstream (OCS fork)   | student   |
-| Scrummer     | Torin    | github.com/torin/student            | downstream (fork)     | student   |
-| Scrummer     | Avantika | github.com/avantika/student         | downstream (fork)     | student   |
-| Scrummer     | Aadit    | github.com/aaadit/student           | downstream (fork)     | student   |
+| Role         | Name     | Repo Location                                 | Stream                | Repo Name |
+|--------------|----------|-----------------------------------------------|-----------------------|-----------|
+| Scrum Master | John     | <https://github.com/jm1021/student>           | upstream (OCS fork)   | student   |
+| Scrummer     | Anish    | <https://github.com/neur0n-7/student>         | downstream (fork)     | student   |
+| Scrummer     | Samarth  | <https://github.com/samarthhande/student>     | downstream (fork)     | student   |
+| Scrummer     | James    | <https://github.com/1j-bla1/student>          | downstream (fork)     | student   |
 
 
 ## Links to Learning
