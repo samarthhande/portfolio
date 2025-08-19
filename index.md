@@ -22,10 +22,10 @@ Hi! My name is Anish Gupta.
 
 > Coding starts with tools, explore these tools and procedures with a click.
 
-<a href="https://github.com/Open-Coding-Society/student">
+<a href="https://github.com/neur0n-7/student">
     <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white" alt="GitHub">
 </a>
-<a href="https://open-coding-society.github.io/student">
+<a href="https://neur0n-7.github.io/student">
     <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?logo=github&logoColor=white" alt="GitHub Pages">
 </a>
 <a href="https://kasm.opencodingsociety.com/" class="button small" style="background-color: #6b4bd3ff">
