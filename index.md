@@ -8,12 +8,12 @@ hide: true
 
 Hi! My name is Anish Gupta.
 
-| Role         | Name     | Repo Location                                 | Stream                | Repo Name |
-|--------------|----------|-----------------------------------------------|-----------------------|-----------|
-| Scrum Master | John     | <https://github.com/jm1021/student>           | upstream (OCS fork)   | student   |
-| Scrummer     | Anish    | <https://github.com/neur0n-7/student>         | downstream (fork)     | student   |
-| Scrummer     | Samarth  | <https://github.com/samarthhande/student>     | downstream (fork)     | student   |
-| Scrummer     | James    | <https://github.com/1j-bla1/student>          | downstream (fork)     | student   |
+| Role         | Name      | Repo Location                                 | Stream                | Repo Name |
+|--------------|-----------|-----------------------------------------------|-----------------------|-----------|
+| Scrum Master | John M    | <https://github.com/jm1021/student>           | upstream (OCS fork)   | student   |
+| Scrummer     | Anish G   | <https://github.com/neur0n-7/student>         | downstream (fork)     | student   |
+| Scrummer     | Samarth H | <https://github.com/samarthhande/student>     | downstream (fork)     | student   |
+| Scrummer     | James B   | <https://github.com/1j-bla1/student>          | downstream (fork)     | student   |
 
 
 ## Links to Learning
