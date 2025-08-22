@@ -114,6 +114,7 @@ Here is what I did at those places:
 - Started learning Scratch coding in second grade
 - Started learning Python in 4th - 5th grade from my dad
 - Started competitive programming in 6th grade in the USACO and ACSL competitions
+- Started learning C++ in 6th grade
 - Joined CyberAegis in 8th grade
     - 5th team nationally at semifinals in the middle school division of CyberPatriot
     - Competed in MITRE eCTF and the Space Grand Challenge with CyberAegis
@@ -123,13 +124,16 @@ Here is what I did at those places:
 
 ### (NOT UPDATED PAST THIS POINT)  
 
+<!-- To do: update below section -->
+
 ### Culture, Family, and Fun
 
 Everything for me, as for many others, revolves around family and faith.
-
 - My mother told me that I was Danish, English. and Irish, here is my researched [family tree]({{site.baseurl}}/images/about/familytree.png)
 - My family is pretty big as I have been married twice, my 1st wife passed away.  We have had 5 kids, 4 adopted by me, 1 biological.  Plus, there are three grandkids.  My name to my grandkids is Abuilito.
 - The gallery of pics has some of my family, fun, culture and faith memories.
+
+<!-- To do: replace below gallery with singular image -->
 
 <comment>
 Gallery of Pics, scroll to the right for more ...
@@ -148,3 +152,4 @@ Gallery of Pics, scroll to the right for more ...
   <img src="{{site.baseurl}}/images/about/grandkids.jpg" alt="Image 11">
   <img src="{{site.baseurl}}/images/about/farm.jpg" alt="Image 12">
 </div>
+
