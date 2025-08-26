@@ -122,15 +122,13 @@ Here is what I did at those places:
 - Qualified to USACO Silver in 8th grade
 - Silver medalist at ACSL national finals 2025
 
-### (NOT UPDATED PAST THIS POINT)  
-
-<!-- To do: update below section -->
 
 ### Culture, Family, and Fun
 
-Everything for me, as for many others, revolves around family and faith.
-- My mother told me that I was Danish, English. and Irish, here is my researched [family tree]({{site.baseurl}}/images/about/familytree.png)
-- My family is pretty big as I have been married twice, my 1st wife passed away.  We have had 5 kids, 4 adopted by me, 1 biological.  Plus, there are three grandkids.  My name to my grandkids is Abuilito.
+- I live with my mom, dad, and older brother in San Diego, CA.
+- My mom, dad, and older brother were all born in India, but I was born in the US.
+- Most of my extended family lives in India, but two of my cousins live in Oregon.
+
 <!---- The gallery of pics has some of my family, fun, culture and faith memories. --->
 <!-- To do: add a gallery with a few images -->
 
