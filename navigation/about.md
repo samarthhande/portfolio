@@ -10,7 +10,7 @@ comments: true
 Here are some places I have lived.
 
 <comment>
-Flags are made using Wikipedia images
+Flags are from Wikipedia images
 </comment>
 
 <style>
@@ -128,9 +128,6 @@ Here is what I did at those places:
 - I live with my mom, dad, and older brother in San Diego, CA.
 - My mom, dad, and older brother were all born in India, but I was born in the US.
 - Most of my extended family lives in India, but two of my cousins live in Oregon.
-
-<!---- The gallery of pics has some of my family, fun, culture and faith memories. --->
-<!-- To do: add a gallery with a few images -->
 
 <!--
 <comment>
