@@ -126,7 +126,7 @@ Here is what I did at those places:
 ### Culture, Family, and Fun
 
 - I live with my mom, dad, and older brother in San Diego, CA.
-- My mom, dad, and older brother were all born in India, but I was born in the US.
+- My mom, dad, and older brother were all born in India, but I was born in the US, in Pleasanton, California.
 - Most of my extended family lives in India, but two of my cousins live in Oregon.
 
 <!--
