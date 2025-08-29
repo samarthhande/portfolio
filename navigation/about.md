@@ -589,7 +589,7 @@ Here is what I did at those places
 
 
 <details>
-<summary>Vihaan</summary>
+<summary>Vihaan Kelaguru</summary>
 <div markdown="1">
 
 ## As a conversation Starter
