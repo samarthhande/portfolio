@@ -1,19 +1,22 @@
 ---
 layout: base
-title: I'm Anish Gupta
+title: Our team
 hide: true
 ---
 
-### Me and Team
+### Our Team
 
-Hi! My name is Anish Gupta.
+Hi!
 
 | Role         | Name      | Repo Location                                 | Stream                | Repo Name |
 |--------------|-----------|-----------------------------------------------|-----------------------|-----------|
-| Scrum Master | John    | <https://github.com/jm1021/student>           | upstream (OCS fork)   | student   |
-| Scrummer     | Anish   | <https://github.com/neur0n-7/student>         | downstream (fork)     | student   |
-| Scrummer     | Samarth | <https://github.com/samarthhande/student>     | downstream (fork)     | student   |
-| Scrummer     | James   | <https://github.com/1j-bla1/student>          | downstream (fork)     | student   |
+| Scrum Master | John      | <https://github.com/jm1021/student>           | upstream (OCS fork)   | student   |
+| Scrummer     | Anish     | <https://github.com/neur0n-7/student>         | downstream (fork)     | student   |
+| Scrummer     | Samarth   | <https://github.com/samarthhande/student>     | downstream (fork)     | student   |
+| Scrummer     | James     | <https://github.com/1j-bla1/student>          | downstream (fork)     | student   |
+| Scrummer     | Krish     | <https://github.com/TheCoder203/student>      | downstream (fork)     | student   |
+| Scrummer     | Pranay    | <https://github.com/pkdev0101/student>        | downstream (fork)     | student   |
+| Scrummer     | Vihaan    | <https://github.com/veen456/student>          | downstream (fork)     | student   |
 
 
 ## Links to Learning
@@ -22,10 +25,10 @@ Hi! My name is Anish Gupta.
 
 > Coding starts with tools, explore these tools and procedures with a click.
 
-<a href="https://github.com/neur0n-7/student">
+<a href="https://github.com/CompSciTeam/student">
     <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white" alt="GitHub">
 </a>
-<a href="https://neur0n-7.github.io/student">
+<a href="https://CompSciTeam.github.io/student">
     <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?logo=github&logoColor=white" alt="GitHub Pages">
 </a>
 <a href="https://kasm.opencodingsociety.com/" class="button small" style="background-color: #6b4bd3ff">
