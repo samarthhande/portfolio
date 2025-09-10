@@ -42,12 +42,34 @@ Hi!
 
 ### Class Progress
 
+<!--
 <a href="{{site.baseurl}}/snake" class="button small" style="background-color: #6b4bd3ff">
     Snake Game
 </a>
 <a href="{{site.baseurl}}/turtle" class="button small" style="background-color: #2A7DB1">
     <span style="color: #000000">Turtle</span>
 </a>
+-->
+<a href="{{site.baseurl}}/snake">
+    <img src="{{site.baseurl}}/images/index/snake.png" alt="Snake">
+</a>
+
+<br>
+
+<a href="{{site.baseurl}}/background">
+    <img src="{{site.baseurl}}/images/index/background.png" alt="Snake">
+</a>
+
+<br>
+
+<a href="{{site.baseurl}}/turtle">
+    <img src="{{site.baseurl}}/images/index/turtle.png" alt="Snake">
+</a>
+
+<br>
+
+<img src="{{site.baseurl}}/images/index/calculator.png" alt="Snake">
+
 
 <br>
 
