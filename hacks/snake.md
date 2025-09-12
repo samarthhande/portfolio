@@ -274,7 +274,7 @@ permalink: /snake/
                 activeDot(snake[i].x, snake[i].y);
             }
             // Paint food
-            activeDot(food.x, food.y);
+            activeApple(food.x, food.y);
             // Debug
             //document.getElementById("debug").innerHTML = snake_dir + " " + snake_next_dir + " " + snake[0].x + " " + snake[0].y;
             // Recursive call after speed delay, déjà vu
@@ -330,6 +330,12 @@ permalink: /snake/
             ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
         }
+
+        let activeApple = function(x, y){
+            ctx.fillStyle = "#ff0000ff";
+            ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+        }   
+
         /* Random food placement */
         /////////////////////////////////////////////////////////////
         let addFood = function(){
