@@ -265,10 +265,13 @@ permalink: /snake/
                 addFood();
                 activeDot(food.x, food.y);
             }
-            // Repaint canvas
-            ctx.beginPath();
-            ctx.fillStyle = "royalblue";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Repaint canvas with checkered background
+            for(let y = 0; y < canvas.height / BLOCK; y++) {
+                for(let x = 0; x < canvas.width / BLOCK; x++) {
+                    ctx.fillStyle = ((x + y) % 2 === 0) ? "#A5D6A7" : "#388E3C"; // light green : dark green
+                    ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+                }
+            }
             // Paint snake
             for(let i = 0; i < snake.length; i++){
                 activeDot(snake[i].x, snake[i].y);
