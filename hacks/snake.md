@@ -268,7 +268,7 @@ permalink: /snake/
             // Repaint canvas with checkered background
             for(let y = 0; y < canvas.height / BLOCK; y++) {
                 for(let x = 0; x < canvas.width / BLOCK; x++) {
-                    ctx.fillStyle = ((x + y) % 2 === 0) ? "#A5D6A7" : "#388E3C"; // light green : dark green
+                    ctx.fillStyle = ((x + y) % 2 === 0) ? "#a9d750" : "#a2d148"; // light green : dark green
                     ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
                 }
             }
@@ -330,7 +330,7 @@ permalink: /snake/
         /* Dot for Food or Snake part */
         /////////////////////////////////////////////////////////////
         let activeDot = function(x, y){
-            ctx.fillStyle = "#FFFFFF";
+            ctx.fillStyle = "#2f00ffff";
             ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
         }
 
