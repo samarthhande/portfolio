@@ -69,10 +69,14 @@ permalink: /onboarding/home
   <div class="onboard-inner">
     <h4>The Tinkerers</h4>
     <hr>
-    <h1 class="glowing-text">CSSE Trimester 1 Onboarding Adventure</h1>
-    <br>
-    <strong><button type="button" class="bigbutton" href="{{  site.baseurl  }}/onboarding/navigation">LET'S DIVE IN</button></strong>
-  </div>
+    <h1> CSSE Trimester 1 Onboarding Adventure </h1>
+    <button 
+        type="button" 
+        class="bigbutton" 
+        onclick="window.location.href='{{ site.baseurl }}/onboarding/navigation'">
+        LET'S DIVE IN
+    </button>  
+    </div>
 </div>
 
 <center>  
