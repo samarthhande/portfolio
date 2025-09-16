@@ -37,6 +37,9 @@ permalink: /wordgame
 <p>Select a game mode (string length) from the options menu and try to type the prompt as quickly and accurately as possible!</p>
 <button style="float: right;" id="options">Options</button>
 
+<p>WPM: <span class="wpm"></span></p>
+<p>Accuracy: <span class="accuracy"></span></p>
+
 <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div><div class="progress-text">0%</div></div>
 <canvas id="wordCanvas" width="800" height="200"></canvas>
 

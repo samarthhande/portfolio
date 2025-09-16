@@ -15,7 +15,8 @@ breadcrumb: true
 
 We have made multiple quality-of-life improvements for the Word Game. Below is a list of all the modifications we made.
 
-- 
+- Changed the font of the text to Times New Roman
+- Added a gradient progress bar
 
 
 ## Play our new-and-improved word game at [compsciteam.github.io/student/wordgame](https://compsciteam.github.io/student/wordgame)!
