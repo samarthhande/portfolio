@@ -72,15 +72,6 @@ permalink: /onboarding/home
   z-index: -1; /* sit behind the overlay and content */
 }
 
-/* Dark overlay on top of GIF */
-.onboard-viewport::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.65); /* darker overlay */
-  z-index: 0;
-}
-
 .onboard-inner {
   position: relative;
   z-index: 1;
@@ -88,6 +79,7 @@ permalink: /onboarding/home
 }
 </style>
 
+<center>
 <div class="onboard-viewport">
   <!-- Background GIF -->
   <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydTF0YjdlYnFla3F4eHZzZnlvc2NrYWFuaDZ2amloNThsYWRwajYyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tn33aiTi1jkl6H6/source.gif"
@@ -107,3 +99,4 @@ permalink: /onboarding/home
     </button>  
   </div>
 </div>
+</center>
