@@ -5,107 +5,195 @@ permalink: /snake/
 ---
 
 <style>
-
+    /* Page and layout */
     body{
+        background: linear-gradient(180deg, #0f1724 0%, #112131 60%);
+        color: #e6eef8;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding: 28px 12px;
     }
     .wrap{
         margin-left: auto;
         margin-right: auto;
+        display: block;
+    }
+
+    /* central game card */
+    .game-shell{
+        max-width: 520px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.03);
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 10px 30px rgba(2,6,23,0.6);
     }
 
     canvas{
         display: none;
-        border-style: solid;
-        border-width: 10px;
-        border-color: #FFFFFF;
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        border: 6px solid rgba(255,255,255,0.08);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.6), inset 0 0 18px rgba(255,255,255,0.02);
+        background: linear-gradient(180deg, #99d750 0%, #74c02a 100%);
     }
-    canvas:focus{
-        outline: none;
+    canvas:focus{ outline: none; }
+
+    /* All screens style (menu, settings, gameover) */
+    #gameover p, #setting p, #menu p{ font-size: 18px; margin: 8px 0; }
+
+    .screen-card{
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        padding: 18px;
+        border-radius: 10px;
+        margin: 14px auto;
+        max-width: 420px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.45);
     }
 
-    /* All screens style */
-    #gameover p, #setting p, #menu p{
-        font-size: 20px;
+    /* make the action anchors look like buttons */
+    .link-alert{
+        display:inline-block;
+        padding: 10px 16px;
+        border-radius: 8px;
+        margin: 6px 6px 0 0;
+        background: linear-gradient(180deg,#2b7af0,#1453c7);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 6px 16px rgba(20,40,90,0.45);
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
     }
+    .link-alert:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(20,40,90,0.55); cursor:pointer; }
 
-    #gameover a, #setting a, #menu a{
-        font-size: 30px;
-        display: block;
+    #menu{ display: block; }
+    #gameover{ display: none; }
+    #setting{ display: none; }
+
+    /* keep settings input hidden but style labels as pills (see below) */
+    #setting input{ display:none; }
+    #setting label{ cursor: pointer; }
+    #setting input:checked + label{ background-color: #FFF; color: #000; }
+    /* New styles for improved settings UI */
+    #setting { 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
     }
-
-    #gameover a:hover, #setting a:hover, #menu a:hover{
-        cursor: pointer;
+    .settings-card{
+        width: 100%;
+        max-width: 420px;
+        background: rgba(0,0,0,0.18);
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        text-align: left;
     }
-
-    #gameover a:hover::before, #setting a:hover::before, #menu a:hover::before{
-        content: ">";
-        margin-right: 10px;
+    .settings-title{
+        font-size: 1.15rem;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #fff;
     }
-
-    #menu{
-        display: block;
+    .setting-group{
+        margin: 12px 0;
     }
-
-    #gameover{
-        display: none;
+    .option-row{
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 8px;
     }
-
-    #setting{
-        display: none;
+    /* pill style labels for radios */
+    #setting input + label{
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.06);
+        color: #eaeaea;
+        border: 1px solid rgba(255,255,255,0.06);
+        transition: all 0.15s ease-in-out;
+        user-select: none;
     }
-
-    #setting input{
-        display:none;
-    }
-
-    #setting label{
-        cursor: pointer;
-    }
-
     #setting input:checked + label{
-        background-color: #FFF;
+        background-color: #fff;
         color: #000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2) inset;
+        transform: translateY(-1px);
+    }
+    #setting p{ color: #f1f1f1; }
+    /* small responsive tweak */
+    @media (max-width: 520px){
+        .game-shell{ padding: 12px; border-radius: 10px; }
+        .screen-card, .settings-card{ margin: 10px; padding: 14px; }
+        canvas{ border-width: 4px; }
     }
 </style>
 
 <h2>Snake</h2>
 <div class="container">
-    <p class="fs-4">Score: <span id="score_value">0</span></p>
+    <p class="fs-4">Apples: <span id="score_value">0</span></p>
 
-    <div class="container bg-secondary" style="text-align:center;">
+    <div class="game-shell" style="text-align:center;">
         <!-- Main Menu -->
-        <div id="menu" class="py-4 text-light">
-            <p>Welcome to Snake, press <span style="background-color: #FFFFFF; color: #000000">space</span> to begin</p>
-            <a id="new_game" class="link-alert">new game</a>
-            <a id="setting_menu" class="link-alert">settings</a>
+        <div id="menu" class="py-4 text-light screen-card">
+            <p>Welcome to Snake — press <span style="background-color: #FFFFFF; color: #000000; padding:2px 6px; border-radius:4px">space</span> to begin</p>
+            <a id="new_game" class="link-alert">New Game</a>
+            <a id="setting_menu" class="link-alert">Settings</a>
         </div>
         <!-- Game Over -->
-        <div id="gameover" class="py-4 text-light">
-            <p>Game Over, press <span style="background-color: #FFFFFF; color: #000000">space</span> to try again</p>
-            <a id="new_game1" class="link-alert">new game</a>
-            <a id="setting_menu1" class="link-alert">settings</a>
+        <div id="gameover" class="py-4 text-light screen-card" style="display:none;">
+            <p>Game Over — press <span style="background-color: #FFFFFF; color: #000000; padding:2px 6px; border-radius:4px">space</span> to try again</p>
+            <a id="new_game1" class="link-alert">New Game</a>
+            <a id="setting_menu1" class="link-alert">Settings</a>
         </div>
         <!-- Play Screen -->
         <canvas id="snake" class="wrap" width="320" height="320" tabindex="1"></canvas>
         <!-- Settings Screen -->
-        <div id="setting" class="py-4 text-light">
-            <p>Settings Screen, press <span style="background-color: #FFFFFF; color: #000000">space</span> to go back to playing</p>
-            <a id="new_game2" class="link-alert">new game</a>
-            <br>
-            <p>Speed:
-                <input id="speed1" type="radio" name="speed" value="120" checked/>
-                <label for="speed1">Slow</label>
-                <input id="speed2" type="radio" name="speed" value="75"/>
-                <label for="speed2">Normal</label>
-                <input id="speed3" type="radio" name="speed" value="35"/>
-                <label for="speed3">Fast</label>
-            </p>
-            <p>Wall:
-                <input id="wallon" type="radio" name="wall" value="1" checked/>
-                <label for="wallon">On</label>
-                <input id="walloff" type="radio" name="wall" value="0"/>
-                <label for="walloff">Off</label>
-            </p>
+        <div id="setting" class="py-4 text-light" style="display:none;">
+            <div class="settings-card">
+                <div class="settings-title">Settings</div>
+                <p style="margin:0 0 8px 0; font-size:0.95rem; color: #ddd;">Press <span style="background-color: #FFFFFF; color: #000000; padding:2px 6px; border-radius:4px">space</span> to go back to playing</p>
+                <div class="setting-group">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div style="font-weight:600; color:#fff;">Speed</div>
+                        <a id="new_game2" class="link-alert" style="font-size:0.95rem;">new game</a>
+                    </div>
+                    <div class="option-row">
+                        <input id="speed1" type="radio" name="speed" value="120" checked/>
+                        <label for="speed1">Slow</label>
+                        <input id="speed2" type="radio" name="speed" value="75"/>
+                        <label for="speed2">Normal</label>
+                        <input id="speed3" type="radio" name="speed" value="35"/>
+                        <label for="speed3">Fast</label>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <div style="font-weight:600; color:#fff;">Wall</div>
+                    <div class="option-row">
+                        <input id="wallon" type="radio" name="wall" value="1" checked/>
+                        <label for="wallon">On</label>
+                        <input id="walloff" type="radio" name="wall" value="0"/>
+                        <label for="walloff">Off</label>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <div style="font-weight:600; color:#fff;">Mode</div>
+                    <div class="option-row">
+                        <input id="mode_default" type="radio" name="mode" value="default" checked/>
+                        <label for="mode_default">Default</label>
+                        <input id="mode_colorblind" type="radio" name="mode" value="colorblind"/>
+                        <label for="mode_colorblind">Colorblind</label>
+                        <input id="mode_light" type="radio" name="mode" value="light"/>
+                        <label for="mode_light">Light</label>
+                        <input id="mode_dark" type="radio" name="mode" value="dark"/>
+                        <label for="mode_dark">Dark</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -120,9 +208,10 @@ permalink: /snake/
         // HTML Game IDs
         const SCREEN_SNAKE = 0;
         const screen_snake = document.getElementById("snake");
-        const ele_score = document.getElementById("score_value");
-        const speed_setting = document.getElementsByName("speed");
-        const wall_setting = document.getElementsByName("wall");
+    const ele_score = document.getElementById("score_value");
+    const speed_setting = document.getElementsByName("speed");
+    const wall_setting = document.getElementsByName("wall");
+    const mode_setting = document.getElementsByName("mode");
         // HTML Screen IDs (div)
         const SCREEN_MENU = -1, SCREEN_GAME_OVER=1, SCREEN_SETTING=2;
         const screen_menu = document.getElementById("menu");
@@ -144,6 +233,11 @@ permalink: /snake/
         let food = {x: 0, y: 0};
         let score;
         let wall;
+    // Color scheme variables (default values)
+    let color_light_tile = "#a9d750"; // default light tile
+    let color_dark_tile = "#a2d148";  // default dark tile
+    let color_snake = "#2f00ffff";    // blue snake
+    let color_apple = "#ff0000ff";    // red apple
         /* Display Control */
         /////////////////////////////////////////////////////////////
         // 0 for the game
@@ -201,6 +295,54 @@ permalink: /snake/
                         if(wall_setting[i].checked){
                             setWall(wall_setting[i].value);
                         }
+                    }
+                });
+            }
+            // mode setting (colors)
+            function applyMode(mode){
+                switch(mode){
+                    case 'colorblind':
+                        // high contrast, colorblind-friendly palette
+                        color_light_tile = '#ffd97a'; // warm yellow
+                        color_dark_tile  = '#ffd15a';
+                        color_snake = '#0000ff'; // bright blue
+                        color_apple = '#ff00ff'; // magenta
+                        break;
+                    case 'light':
+                        color_light_tile = '#f0f8e8';
+                        color_dark_tile  = '#dfeccf';
+                        color_snake = '#0b63d6';
+                        color_apple = '#d32f2f';
+                        break;
+                    case 'dark':
+                        color_light_tile = '#355a2b';
+                        color_dark_tile  = '#243b1b';
+                        color_snake = '#1e90ff';
+                        color_apple = '#ff6b6b';
+                        break;
+                    default:
+                        // default green scheme
+                        color_light_tile = '#a9d750';
+                        color_dark_tile  = '#a2d148';
+                        color_snake = '#2f00ffff';
+                        color_apple = '#ff0000ff';
+                }
+                // repaint if playing
+                if(snake && snake.length){
+                    for(let y = 0; y < canvas.height / BLOCK; y++) {
+                        for(let x = 0; x < canvas.width / BLOCK; x++) {
+                            ctx.fillStyle = ((x + y) % 2 === 0) ? color_light_tile : color_dark_tile;
+                            ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+                        }
+                    }
+                    for(let i = 0; i < snake.length; i++) activeDot(snake[i].x, snake[i].y);
+                    activeApple(food.x, food.y);
+                }
+            }
+            for(let i = 0; i < mode_setting.length; i++){
+                mode_setting[i].addEventListener('click', function(){
+                    for(let j = 0; j < mode_setting.length; j++){
+                        if(mode_setting[j].checked) applyMode(mode_setting[j].value);
                     }
                 });
             }
@@ -268,7 +410,7 @@ permalink: /snake/
             // Repaint canvas with checkered background
             for(let y = 0; y < canvas.height / BLOCK; y++) {
                 for(let x = 0; x < canvas.width / BLOCK; x++) {
-                    ctx.fillStyle = ((x + y) % 2 === 0) ? "#a9d750" : "#a2d148"; // light green : dark green
+                    ctx.fillStyle = ((x + y) % 2 === 0) ? color_light_tile : color_dark_tile;
                     ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
                 }
             }
@@ -334,12 +476,12 @@ permalink: /snake/
         /* Dot for Food or Snake part */
         /////////////////////////////////////////////////////////////
         let activeDot = function(x, y){
-            ctx.fillStyle = "#2f00ffff";
+                    ctx.fillStyle = color_snake;
             ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
         }
 
         let activeApple = function(x, y){
-            ctx.fillStyle = "#ff0000ff";
+                    ctx.fillStyle = color_apple;
             ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
         }   
 

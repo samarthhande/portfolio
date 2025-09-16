@@ -4,19 +4,17 @@ title: Our team
 hide: true
 ---
 
-### Our Team
 
-Hi!
+## <center> ⚙️ THE TINKERERS 🧑‍💻 </center>
 
-| Role         | Name      | Repo Location                                 | Stream                | Repo Name |
-|--------------|-----------|-----------------------------------------------|-----------------------|-----------|
-| Scrum Master | John      | <https://github.com/jm1021/student>           | upstream (OCS fork)   | student   |
-| Scrummer     | Anish     | <https://github.com/neur0n-7/student>         | downstream (fork)     | student   |
-| Scrummer     | Samarth   | <https://github.com/samarthhande/student>     | downstream (fork)     | student   |
-| Scrummer     | James     | <https://github.com/1j-bla1/student>          | downstream (fork)     | student   |
-| Scrummer     | Krish     | <https://github.com/TheCoder203/student>      | downstream (fork)     | student   |
-| Scrummer     | Pranay    | <https://github.com/pkdev0101/student>        | downstream (fork)     | student   |
-| Scrummer     | Vihaan    | <https://github.com/veen456/student>          | downstream (fork)     | student   |
+| Role                   | Name      | Repo Location                                 | Stream                | Repo Name |
+|------------------------|-----------|-----------------------------------------------|-----------------------|-----------|
+| Scrum Master           | Anish     | <https://github.com/neur0n-7/student>         | upstream (OCS fork)     | student   |
+| Asst. Scrum Master     | Samarth   | <https://github.com/samarthhande/student>     | downstream (fork)     | student   |
+| Scrummer               | James     | <https://github.com/1j-bla1/student>          | downstream (fork)     | student   |
+| Scrummer               | Krish     | <https://github.com/TheCoder203/student>      | downstream (fork)     | student   |
+| Scrummer               | Pranay    | <https://github.com/pkdev0101/student>        | downstream (fork)     | student   |
+| Scrummer               | Vihaan    | <https://github.com/veen456/student>          | downstream (fork)     | student   |
 
 
 ## Links to Learning
