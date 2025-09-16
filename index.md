@@ -29,6 +29,8 @@ hide: true
 <a href="https://CompSciTeam.github.io/student">
     <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?logo=github&logoColor=white" alt="GitHub Pages">
 </a>
+
+
 <a href="https://kasm.opencodingsociety.com/" class="button small" style="background-color: #6b4bd3ff">
     KASM
 </a>
@@ -48,6 +50,11 @@ hide: true
     <span style="color: #000000">Turtle</span>
 </a>
 -->
+
+<a href="{{site.baseurl}}/onboarding/home" class="button small" style="background-color: #6b4bd3ff">
+    Onboarding Adventure
+</a>
+
 <a href="{{site.baseurl}}/snake">
     <img src="{{site.baseurl}}/images/index/snake.png" alt="Snake">
 </a>
@@ -66,8 +73,9 @@ hide: true
 
 <br>
 
-<img src="{{site.baseurl}}/images/index/calculator.png" alt="Snake">
-
+<a href="{{site.baseurl}}/calculator">
+    <img src="{{site.baseurl}}/images/index/calculator.png" alt="Snake">
+</a>
 
 <br>
 
