@@ -7,7 +7,7 @@ permalink: /snake/
 <style>
     /* Page and layout */
     body{
-        background: linear-gradient(180deg, #0f1724 0%, #112131 60%);
+        // background: linear-gradient(180deg, #0f1724 0%, #112131 60%);
         color: #e6eef8;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         -webkit-font-smoothing: antialiased;
