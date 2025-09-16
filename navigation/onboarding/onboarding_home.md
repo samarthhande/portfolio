@@ -49,22 +49,19 @@ permalink: /onboarding/home
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-</style>
-
-<style>
 .onboard-viewport {
-  position: relative; /* needed for overlay */
-  min-height: calc(100vh - 120px);
+  position: relative;
+  width: 100vw;   /* full viewport width */
+  height: 100vh;  /* full viewport height */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 16px;
-  box-sizing: border-box;
   text-align: center;
   background-image: url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydTF0YjdlYnFla3F4eHZzZnlvc2NrYWFuaDZ2amloNThsYWRwajYyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tn33aiTi1jkl6H6/source.gif');
-  background-size: cover;
-  background-position: center;
+  background-size: cover;      /* cover entire container */
+  background-position: center; /* center GIF */
   background-repeat: no-repeat;
+  overflow: hidden;            /* avoid scrollbars from GIF overflow */
 }
 
 /* Dark overlay */
@@ -72,13 +69,13 @@ permalink: /onboarding/home
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* 0.5 = 50% darker */
-  z-index: 0; /* behind text */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
 
 .onboard-inner {
   position: relative;
-  z-index: 1; /* text stays above overlay */
+  z-index: 1; 
   max-width: 980px;
 }
 </style>
