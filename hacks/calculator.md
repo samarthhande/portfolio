@@ -55,7 +55,7 @@ Hack 3: Implement 1 number operation (ie SQRT)
   /* ===== Operators, Clear, Equals ===== */
   .calculator-operation {
     background-color: #ff6666; /* Red */
-    color: white;
+    color: black;
     border-radius: 12px;
     padding: 0.5em;
     font-size: 18px;
