@@ -63,13 +63,24 @@ permalink: /onboarding/home
 
 /* GIF as an img for perfect centering */
 .background-gif {
-  position: absolute;
-  inset: 0; /* fill the viewport */
-  width: 100%;
-  height: 100%;
+  position: fixed; /* anchor to the viewport so it always fills the screen */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
   object-position: center center; /* ensure centering */
-  z-index: -1; /* sit behind the overlay and content */
+  z-index: -2; /* sit behind the overlay and content */
+  pointer-events: none; /* allow clicks to pass through */
+}
+
+/* Dark overlay placed above the GIF but behind content */
+.onboard-viewport::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.21);
+  z-index: -1;
 }
 
 .onboard-inner {
@@ -79,7 +90,6 @@ permalink: /onboarding/home
 }
 </style>
 
-<center>
 <div class="onboard-viewport">
   <!-- Background GIF -->
   <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydTF0YjdlYnFla3F4eHZzZnlvc2NrYWFuaDZ2amloNThsYWRwajYyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tn33aiTi1jkl6H6/source.gif"
