@@ -21,18 +21,18 @@ permalink: /onboarding/home
 }
 
 .glowing-text {
-  color: #fff; /* Set the text color to white or a light color for better contrast */
-  text-shadow: 0 0 10px #8a2be2, /* Purple glow */
-               0 0 20px #8a2be2, /* Deeper purple glow */
-               0 0 30px #4169e1, /* Blue glow */
-               0 0 40px #4169e1; /* Deeper blue glow */
+  color: #fff;
+  text-shadow: 0 0 10px #8a2be2,
+               0 0 20px #8a2be2,
+               0 0 30px #4169e1,
+               0 0 40px #4169e1;
 }
 
 .bigbutton {
     background-color: #4169e1;
     color: white;
     padding: 15px 32px;
-    text-align: center; /* Center the text */
+    text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -41,47 +41,60 @@ permalink: /onboarding/home
     border: none;
     font-weight: 600;
     border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .bigbutton:hover {
     background-color: #8a2be2;
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    transform: scale(1.05);
 }
 
+/* Fullscreen viewport */
 .onboard-viewport {
   position: relative;
-  width: 100vw;   /* full viewport width */
-  height: 100vh;  /* full viewport height */
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-image: url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydTF0YjdlYnFla3F4eHZzZnlvc2NrYWFuaDZ2amloNThsYWRwajYyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tn33aiTi1jkl6H6/source.gif');
-  background-size: cover;      /* cover entire container */
-  background-position: center; /* center GIF */
-  background-repeat: no-repeat;
-  overflow: hidden;            /* avoid scrollbars from GIF overflow */
+  overflow: hidden;
 }
 
-/* Dark overlay */
+/* GIF as an img for perfect centering */
+.background-gif {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+/* Dark overlay on top of GIF */
 .onboard-viewport::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0,0,0,0.5);
   z-index: 0;
 }
 
 .onboard-inner {
   position: relative;
-  z-index: 1; 
+  z-index: 1;
   max-width: 980px;
 }
 </style>
 
-
 <div class="onboard-viewport">
+  <!-- Background GIF -->
+  <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydTF0YjdlYnFla3F4eHZzZnlvc2NrYWFuaDZ2amloNThsYWRwajYyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tn33aiTi1jkl6H6/source.gif"
+       alt="Animated Background"
+       class="background-gif">
+
   <div class="onboard-inner">
     <h4>The Tinkerers</h4>
     <hr>
@@ -93,5 +106,5 @@ permalink: /onboarding/home
         onclick="window.location.href='{{ site.baseurl }}/onboarding/navigation'">
         LET'S DIVE IN 🔥
     </button>  
-    </div>
+  </div>
 </div>
