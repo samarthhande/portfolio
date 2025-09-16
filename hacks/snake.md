@@ -206,6 +206,8 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
                         <label for="gm_default">Default</label>
                         <input id="gm_candied" type="radio" name="gamemode" value="candied"/>
                         <label for="gm_candied">Candied Apples</label>
+                        <input id="gm_fruit" type="radio" name="gamemode" value="fruit_frenzy"/>
+                        <label for="gm_fruit">Fruit Frenzy</label>
                     </div>
                 </div>
             </div>
@@ -254,8 +256,17 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
     let color_dark_tile = "#a2d148";  // default dark tile
     let color_snake = "#2f00ffff";    // blue snake
     let color_apple = "#ff0000ff";    // red apple
+    let color_golden = "#ffd700";     // golden apple color
     // gameplay mode
     let current_gamemode = 'default';
+    // golden moving fruit state (used in Fruit Frenzy mode)
+    let goldenFood = {
+        x: -1,
+        y: -1,
+        vx: 1, // velocity in blocks per tick (can be negative)
+        vy: 1,
+        active: false
+    };
         /* Display Control */
         /////////////////////////////////////////////////////////////
         // 0 for the game
@@ -439,6 +450,22 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
                     setSnakeSpeed(newSpeed);
                 }
             }
+            // Fruit Frenzy: check golden moving fruit collision
+            if(goldenFood.active && checkBlock(snake[0].x, snake[0].y, goldenFood.x, goldenFood.y)){
+                // grow snake by one block
+                snake[snake.length] = {x: snake[0].x, y: snake[0].y};
+                // award 3 points for golden apple
+                score += 3;
+                altScore(score);
+                // deactivate golden and respawn normal food
+                goldenFood.active = false;
+                addFood();
+                // small speed boost when golden eaten (optional): decrease delay by 8ms, but not below 6ms
+                if(current_gamemode === 'fruit_frenzy'){
+                    const newSpeed = Math.max(6, Number(snake_speed) - 8);
+                    setSnakeSpeed(newSpeed);
+                }
+            }
             // Repaint canvas with checkered background
             for(let y = 0; y < canvas.height / BLOCK; y++) {
                 for(let x = 0; x < canvas.width / BLOCK; x++) {
@@ -452,9 +479,27 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
             }
             // Paint food
             activeApple(food.x, food.y);
+            // Paint golden food if active
+            if(goldenFood.active){
+                // draw golden with a different color
+                ctx.fillStyle = color_golden;
+                ctx.fillRect(goldenFood.x * BLOCK, goldenFood.y * BLOCK, BLOCK, BLOCK);
+            }
             // Debug
             //document.getElementById("debug").innerHTML = snake_dir + " " + snake_next_dir + " " + snake[0].x + " " + snake[0].y;
             // Recursive call after speed delay, déjà vu
+            // move golden fruit between frames (simple bouncing logic)
+            if(goldenFood.active){
+                // advance position by velocity
+                goldenFood.x += goldenFood.vx;
+                goldenFood.y += goldenFood.vy;
+                // bounce off edges (reverse velocity when hitting walls)
+                if(goldenFood.x < 0){ goldenFood.x = 0; goldenFood.vx *= -1; }
+                if(goldenFood.x >= canvas.width / BLOCK){ goldenFood.x = (canvas.width / BLOCK) - 1; goldenFood.vx *= -1; }
+                if(goldenFood.y < 0){ goldenFood.y = 0; goldenFood.vy *= -1; }
+                if(goldenFood.y >= canvas.height / BLOCK){ goldenFood.y = (canvas.height / BLOCK) - 1; goldenFood.vy *= -1; }
+            }
+
             setTimeout(mainLoop, snake_speed);
         }
         /* New Game setup */
@@ -472,6 +517,9 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
             snake_next_dir = 1;
             // food on canvas
             addFood();
+            // reset golden fruit state
+            goldenFood.active = false;
+            goldenFood.x = -1; goldenFood.y = -1; goldenFood.vx = 1; goldenFood.vy = 1;
             // activate canvas event
             canvas.onkeydown = function(evt) {
                 changeDir(evt.keyCode);
@@ -520,13 +568,41 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
         /* Random food placement */
         /////////////////////////////////////////////////////////////
         let addFood = function(){
-            food.x = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
-            food.y = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
-            for(let i = 0; i < snake.length; i++){
-                if(checkBlock(food.x, food.y, snake[i].x, snake[i].y)){
-                    addFood();
-                }
-            }
+                    // If Fruit Frenzy mode is active, occasionally spawn a moving golden fruit
+                    if(current_gamemode === 'fruit_frenzy' && Math.random() < 0.25 && !goldenFood.active){
+                        // attempt to place golden fruit not on the snake
+                        let gx = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
+                        let gy = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
+                        for(let i = 0; i < snake.length; i++){
+                            if(checkBlock(gx, gy, snake[i].x, snake[i].y)){
+                                // collision with snake, retry
+                                return addFood();
+                            }
+                        }
+                        goldenFood.x = gx;
+                        goldenFood.y = gy;
+                        // give it random small velocity of -1, 0, or 1 (avoid 0,0)
+                        goldenFood.vx = (Math.random() < 0.5) ? 1 : -1;
+                        goldenFood.vy = (Math.random() < 0.5) ? 1 : -1;
+                        goldenFood.active = true;
+                        // also place a normal food somewhere else
+                        food.x = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
+                        food.y = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
+                        for(let i = 0; i < snake.length; i++){
+                            if(checkBlock(food.x, food.y, snake[i].x, snake[i].y)){
+                                return addFood();
+                            }
+                        }
+                        return;
+                    }
+                    // default single static food
+                    food.x = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
+                    food.y = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
+                    for(let i = 0; i < snake.length; i++){
+                        if(checkBlock(food.x, food.y, snake[i].x, snake[i].y)){
+                            addFood();
+                        }
+                    }
         }
         /* Collision Detection */
         /////////////////////////////////////////////////////////////

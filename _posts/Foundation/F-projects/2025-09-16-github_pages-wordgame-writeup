@@ -1,0 +1,23 @@
+---
+
+toc: False
+layout: post
+title: Word Game Writeup
+description: A writeup of our changes to the word game
+categories: ['Web Development', 'Hacks']
+permalink: /wordgame/writeup
+breadcrumb: true
+---
+
+
+
+### Our changes
+
+We have made multiple quality-of-life improvements for the Word Game. Below is a list of all the modifications we made.
+
+- 
+
+
+## Play our new-and-improved word game at [compsciteam.github.io/student/wordgame](https://compsciteam.github.io/student/wordgame)!
+
+Made by Subteam 1: Anish Gupta, James Blazek, and Vihaan Budharaja
