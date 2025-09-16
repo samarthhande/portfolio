@@ -146,11 +146,52 @@ permalink: /wordgame
     }
 
     function finishGame(prompt, input, startTime) {
-        finished = true;
-        updateStats(prompt, input, startTime);
-        setProgress(100);
-        alert('Finished! WPM: ' + document.querySelector('.wpm').textContent + ', Accuracy: ' + document.querySelector('.accuracy').textContent);
-    }
+    finished = true;
+    updateStats(prompt, input, startTime);
+    setProgress(100);
+
+    const wpm = document.querySelector('.wpm').textContent;
+    const accuracy = document.querySelector('.accuracy').textContent;
+
+    // Create the finish screen overlay
+    const finishScreen = document.createElement('div');
+    finishScreen.style.position = 'fixed';
+    finishScreen.style.top = '0';
+    finishScreen.style.left = '0';
+    finishScreen.style.width = '100%';
+    finishScreen.style.height = '100%';
+    finishScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    finishScreen.style.display = 'flex';
+    finishScreen.style.justifyContent = 'center';
+    finishScreen.style.alignItems = 'center';
+    finishScreen.style.zIndex = '1000';
+    finishScreen.style.color = 'white';
+    finishScreen.style.flexDirection = 'column';
+    finishScreen.style.textAlign = 'center';
+    finishScreen.innerHTML = `
+        <h2 style="color: #6be3a8;">🎉 Game Finished!</h2>
+        <p style="font-size: 2em; margin: 20px;">Your results are in!</p>
+        <p style="font-size: 1.5em;"><strong>WPM:</strong> <span style="color: #6bb6ff;">${wpm}</span></p>
+        <p style="font-size: 1.5em;"><strong>Accuracy:</strong> <span style="color: #6bb6ff;">${accuracy}</span></p>
+        <button id="playAgain" style="margin-top: 30px; padding: 10px 20px; font-size: 1em; cursor: pointer; border: none; background-color: #007BFF; color: white; border-radius: 5px;">Play Again</button>
+    `;
+
+    document.body.appendChild(finishScreen);
+
+    // Add an event listener to the "Play Again" button
+    document.getElementById('playAgain').addEventListener('click', () => {
+        document.body.removeChild(finishScreen);
+        // Reset the game state
+        userInput = '';
+        mistakes = 0;
+        finished = false;
+        startTime = null;
+        drawText(currentString);
+        document.querySelector('.wpm').textContent = '0';
+        document.querySelector('.accuracy').textContent = '100%';
+        setProgress(0);
+    });
+}
 
     function startGame() {
         if (currentString === "") {
