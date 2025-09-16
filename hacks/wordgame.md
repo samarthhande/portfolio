@@ -216,9 +216,9 @@ permalink: /wordgame
     optionsButton.addEventListener('click', () => {
         const menu = document.createElement('div');
         menu.style.position = 'absolute';
-        menu.style.width = '200px'; // Set a fixed width for the menu
-        menu.style.border = '1px solid #ccc';
-        menu.style.backgroundColor = '#fff';
+        menu.style.width = '300px'; // Set a fixed width for the menu
+        menu.style.border = '1px solid #160816ff';
+        menu.style.backgroundColor = '#ae5ef8ff';
         menu.style.padding = '10px';
         menu.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
         menu.style.textAlign = 'center'; // Center-align the text inside the menu
