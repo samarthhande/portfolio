@@ -64,13 +64,12 @@ permalink: /onboarding/home
 /* GIF as an img for perfect centering */
 .background-gif {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 100vh;
+  inset: 0; /* fill the viewport */
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+  object-position: center center; /* ensure centering */
+  z-index: -1; /* sit behind the overlay and content */
 }
 
 /* Dark overlay on top of GIF */
@@ -78,7 +77,7 @@ permalink: /onboarding/home
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.65); /* darker overlay */
   z-index: 0;
 }
 
