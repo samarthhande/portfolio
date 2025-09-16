@@ -39,6 +39,7 @@ permalink: /onboarding/home
     margin: 4px 2px;
     cursor: pointer;
     border: none;
+    font-weight: 600;
     border-radius: 8px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth transition for background color on hover */
 }
@@ -68,8 +69,14 @@ permalink: /onboarding/home
   <div class="onboard-inner">
     <h4>The Tinkerers</h4>
     <hr>
-    <h1 class="glowing-text fadeInUp-animation"> CSSE Trimester 1 Onboarding Adventure</h1>
+    <h1 class="glowing-text">CSSE Trimester 1 Onboarding Adventure</h1>
     <br>
-    <button type="button" class="bigbutton">LET'S DIVE IN</button>
+    <strong><button type="button" class="bigbutton">LET'S DIVE IN</button></strong>
   </div>
 </div>
+
+
+<center>  
+
+![Computer image](https://www.crio.do/blog/content/images/size/w600/2020/09/Sep_01.png)
+</center>
