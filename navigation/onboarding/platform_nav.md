@@ -16,51 +16,24 @@ permalink: /onboarding/navigation
 </style>
 
 <div class="onboard-game">
-	<h2>Onboarding — Play to Navigate</h2>
+	<h2>Onboarding Activity</h2>
 	<p class="controls-small">Use the arrow keys or WASD to move. Press <span class="hint">Enter</span> or click a tile to open that step.</p>
 
 	<div class="grid" id="nav-grid" role="application" aria-label="Onboarding navigation grid">
-		<button class="tile" data-row="0" data-col="0" data-href="{{ site.baseurl }}/onboarding/kasm-setup">
+		<button class="tile" data-row="0" data-col="0" data-href="{{  site.baseurl  }}/onboarding/kasm-setup">
 			<div class="num">1</div>
 			<div class="label">KASM setup</div>
 		</button>
-		<button class="tile" data-row="0" data-col="1" data-href="#">
+		<button class="tile" data-row="0" data-col="1" data-href="{{  site.baseurl  }}/onboarding/linux-filesystem">
 			<div class="num">2</div>
-			<div class="label">Step 2</div>
+			<div class="label">Linux filesystem tutorial</div>
 		</button>
-		<button class="tile" data-row="0" data-col="2" data-href="#">
+		<button class="tile" data-row="0" data-col="2" data-href="{{  site.baseurl  }}/onboarding/sdlc">
 			<div class="num">3</div>
-			<div class="label">Step 3</div>
-		</button>
-
-		<button class="tile" data-row="1" data-col="0" data-href="#">
-			<div class="num">4</div>
-			<div class="label">Step 4</div>
-		</button>
-		<button class="tile" data-row="1" data-col="1" data-href="#">
-			<div class="num">5</div>
-			<div class="label">Step 5</div>
-		</button>
-		<button class="tile" data-row="1" data-col="2" data-href="#">
-			<div class="num">6</div>
-			<div class="label">Step 6</div>
-		</button>
-
-		<button class="tile" data-row="2" data-col="0" data-href="#">
-			<div class="num">7</div>
-			<div class="label">Step 7</div>
-		</button>
-		<button class="tile" data-row="2" data-col="1" data-href="#">
-			<div class="num">8</div>
-			<div class="label">Step 8</div>
-		</button>
-		<button class="tile" data-row="2" data-col="2" data-href="#">
-			<div class="num">9</div>
-			<div class="label">Step 9</div>
+			<div class="label">Software Development Life Cycle</div>
 		</button>
 	</div>
 
-	<div class="controls-small">Tip: Tiles are focusable — you can also tab to them and press Enter.</div>
 </div>
 
 <script>

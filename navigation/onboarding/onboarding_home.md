@@ -71,12 +71,12 @@ permalink: /onboarding/home
     <hr>
     <h1 class="glowing-text">CSSE Trimester 1 Onboarding Adventure</h1>
     <br>
-    <strong><button type="button" class="bigbutton">LET'S DIVE IN</button></strong>
+    <strong><button type="button" class="bigbutton" href="{{  site.baseurl  }}/onboarding/navigation">LET'S DIVE IN</button></strong>
   </div>
 </div>
 
-
 <center>  
-
-![Computer image](https://www.crio.do/blog/content/images/size/w600/2020/09/Sep_01.png)
+  <img src="https://www.crio.do/blog/content/images/size/w600/2020/09/Sep_01.png" 
+       alt="Computer image" 
+       style="max-width:600px; width:100%; height:auto;">
 </center>

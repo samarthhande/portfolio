@@ -202,8 +202,8 @@ permalink: /snake/
                     <div class="option-row">
                         <input id="gm_default" type="radio" name="gamemode" value="default" checked/>
                         <label for="gm_default">Default</label>
-                        <input id="gm_accel" type="radio" name="gamemode" value="accelerate"/>
-                        <label for="gm_accel">Accelerate</label>
+                        <input id="gm_candied" type="radio" name="gamemode" value="candied"/>
+                        <label for="gm_candied">Candied Apples</label>
                     </div>
                 </div>
             </div>
@@ -252,8 +252,8 @@ permalink: /snake/
     let color_dark_tile = "#a2d148";  // default dark tile
     let color_snake = "#2f00ffff";    // blue snake
     let color_apple = "#ff0000ff";    // red apple
-        // gameplay mode
-        let current_gamemode = 'default';
+    // gameplay mode
+    let current_gamemode = 'default';
         /* Display Control */
         /////////////////////////////////////////////////////////////
         // 0 for the game
@@ -430,9 +430,9 @@ permalink: /snake/
                 altScore(++score);
                 addFood();
                 activeDot(food.x, food.y);
-                // If accelerate gamemode is enabled, speed up slightly on each apple
-                if(current_gamemode === 'accelerate'){
-                    // decrease delay by 5ms per apple, floor at 6ms
+                // If Candied Apples gamemode is enabled, speed up slightly on each apple
+                if(current_gamemode === 'candied'){
+                    // each candied apple makes the snake a bit faster: decrease delay by 5ms per apple, floor at 6ms
                     const newSpeed = Math.max(6, Number(snake_speed) - 5);
                     setSnakeSpeed(newSpeed);
                 }

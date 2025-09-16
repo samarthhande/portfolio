@@ -40,7 +40,7 @@ permalink: /onboarding/kasm-setup
 <div class="stepper" id="kasm-stepper">
 	<div class="stepper-header">
 		<div>
-			<div class="step-count">KASM Setup — Step <span id="step-number">1</span> of <span id="step-total">7</span></div>
+			<div class="step-count">KASM Setup — Step <span id="step-number">1</span> of <span id="step-total">9</span></div>
 			<div class="small">Follow these commands in order. Use the arrows to move between steps.</div>
 		</div>
 		<div class="controls">
@@ -54,25 +54,25 @@ permalink: /onboarding/kasm-setup
 		<div class="step active" data-step="1">
 			<h3>1. Create a workspace folder</h3>
 			<div class="cmd">mkdir opencs</div>
-			<p class="small">Creates a new directory named <code>opencs</code> in your current working directory. Tip: use <code>mkdir -p parent/child</code> to create nested folders; if the folder already exists, the command will not overwrite it.</p>
+			<p class="small">Creates a new directory named <code>opencs</code> in your current working directory.</p>
 		</div>
 
 		<div class="step" data-step="2">
 			<h3>2. Enter the folder</h3>
 			<div class="cmd">cd opencs</div>
-			<p class="small">Switch your shell into the <code>opencs</code> folder so subsequent commands operate there. Tip: run <code>pwd</code> to confirm your current directory.</p>
+			<p class="small">Switch your shell into the <code>opencs</code> folder so subsequent commands operate there.</p>
 		</div>
 
 		<div class="step" data-step="3">
 			<h3>3. Clone the repository</h3>
 			<div class="cmd">git clone https://github.com/Open-Coding-Society/student.git</div>
-			<p class="small">Downloads a local copy of the course repository (including history). Replace the URL if you're given a different repo. Tip: use <code>git clone --depth 1 &lt;url&gt;</code> for a shallow clone if you only need the latest files.</p>
+			<p class="small">Downloads a local copy of the course repository (including history). Replace the URL if you're given a different repo.</p>
 		</div>
 
 		<div class="step" data-step="4">
 			<h3>4. Enter the project</h3>
 			<div class="cmd">cd student/</div>
-			<p class="small">Move into the freshly cloned project directory so you can run project scripts. Tip: press Tab for auto-completion of folder names.</p>
+			<p class="small">Move into the freshly cloned project directory so you can run project scripts.</p>
 		</div>
 
 		<div class="step" data-step="5">
@@ -88,7 +88,7 @@ permalink: /onboarding/kasm-setup
 		<div class="step" data-step="6">
 			<h3>6. Run the project's activation script</h3>
 			<div class="cmd">./scripts/activate.sh</div>
-			<p class="small">Some projects include a script to set up environment variables or helper functions. If it isn't executable, run <code>chmod +x ./scripts/activate.sh</code> or execute it with <code>bash ./scripts/activate.sh</code>. Tip: open the script in an editor to see what it does before running it.</p>
+			<p class="small">Some projects include a script to set up environment variables or helper functions. If it isn't executable, run <code>chmod +x ./scripts/activate.sh</code> or execute it with <code>bash ./scripts/activate.sh</code>.</p>
 		</div>
 
 		<div class="step" data-step="7">
@@ -139,8 +139,7 @@ permalink: /onboarding/kasm-setup
 			next.disabled = (i === total-1);
 		}
 
-		prev.addEventListener('click', ()=>{ if(idx>0) idx--; show(idx); });
-		next.addEventListener('click', ()=>{ if(idx<total-1) idx++; show(idx); });
+
 
 		copyBtn.addEventListener('click', ()=>{
 			const codeEl = steps[idx].querySelector('.cmd');
