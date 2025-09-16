@@ -42,6 +42,7 @@ HTML implementation of the calculator.
   
     display: flex;
     align-items: center;
+    justify-content: flex-end; /* Right justify result */
   }
   canvas {
     filter: none;
@@ -99,15 +100,15 @@ numbers.forEach(button => {
 // Number action
 function number (value) { // function to input numbers into the calculator
     if (value != ".") {
-        if (nextReady == true) { // nextReady is used to tell the computer when the user is going to input a completely new number
+        if (nextReady == true) { 
             output.innerHTML = value;
-            if (value != "0") { // if statement to ensure that there are no multiple leading zeroes
+            if (value != "0") { 
                 nextReady = false;
             }
         } else {
-            output.innerHTML = output.innerHTML + value; // concatenation is used to add the numbers to the end of the input
+            output.innerHTML = output.innerHTML + value; 
         }
-    } else { // special case for adding a decimal; can't have two decimals
+    } else { 
         if (output.innerHTML.indexOf(".") == -1) {
             output.innerHTML = output.innerHTML + value;
             nextReady = false;
@@ -123,14 +124,13 @@ operations.forEach(button => {
 });
 
 // Operator action
-function operation (choice) { // function to input operations into the calculator
-    if (firstNumber == null) { // once the operation is chosen, the displayed number is stored into the variable firstNumber
-        firstNumber = parseInt(output.innerHTML);
+function operation (choice) {
+    if (firstNumber == null) { 
+        firstNumber = parseFloat(output.innerHTML);
         nextReady = true;
         operator = choice;
-        return; // exits function
+        return;
     }
-    // occurs if there is already a number stored in the calculator
     firstNumber = calculate(firstNumber, parseFloat(output.innerHTML)); 
     operator = choice;
     output.innerHTML = firstNumber.toString();
@@ -138,7 +138,7 @@ function operation (choice) { // function to input operations into the calculato
 }
 
 // Calculator
-function calculate (first, second) { // function to calculate the result of the equation
+function calculate (first, second) {
     let result = 0;
     switch (operator) {
         case "+":
@@ -167,7 +167,7 @@ equals.forEach(button => {
 });
 
 // Equal action
-function equal () { // function used when the equals button is clicked; calculates equation and displays it
+function equal () {
     firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
     output.innerHTML = firstNumber.toString();
     nextReady = true;
@@ -181,11 +181,48 @@ clear.forEach(button => {
 });
 
 // A/C action
-function clearCalc () { // clears calculator
+function clearCalc () {
     firstNumber = null;
     output.innerHTML = "0";
     nextReady = true;
 }
+
+// ============================
+// Keyboard Support
+// ============================
+document.addEventListener("keydown", function(event) {
+  const key = event.key;
+
+  // Handle numbers and decimal
+  if (!isNaN(key) || key === ".") {
+    number(key);
+  }
+
+  // Handle operations
+  if (key === "+" || key === "-" || key === "*" || key === "/") {
+    operation(key);
+  }
+
+  // Handle equals (= or Enter)
+  if (key === "=" || key === "Enter") {
+    equal();
+  }
+
+  // Handle clear (Escape)
+  if (key === "Escape") {
+    clearCalc();
+  }
+
+  // Handle backspace (delete last digit)
+  if (key === "Backspace") {
+    if (output.innerHTML.length > 1) {
+      output.innerHTML = output.innerHTML.slice(0, -1);
+    } else {
+      output.innerHTML = "0";
+      nextReady = true;
+    }
+  }
+});
 </script>
 
 <!-- 
