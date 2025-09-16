@@ -235,9 +235,9 @@ permalink: /wordgame
             updateStats(selectedString, userInput, startTime);
             updateProgress(selectedString, userInput);
 
-            if (userInput === selectedString) {
-                finishGame(selectedString, userInput, startTime);
-            }
+            if (userInput.length === selectedString.length) {
+    finishGame(selectedString, userInput, startTime);
+}
         };
         // init progress
         setProgress(0);
