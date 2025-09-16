@@ -52,35 +52,49 @@ permalink: /onboarding/home
 </style>
 
 <style>
-  /* Full height flex wrapper to center content vertically and horizontally */
-  .onboard-viewport{
-    min-height: calc(100vh - 120px); /* leave some space for header/footer if present */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px 16px;
-    box-sizing: border-box;
-    text-align: center;
-  }
-  .onboard-inner{ max-width: 980px; }
+.onboard-viewport {
+  position: relative; /* needed for overlay */
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  text-align: center;
+  background-image: url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydTF0YjdlYnFla3F4eHZzZnlvc2NrYWFuaDZ2amloNThsYWRwajYyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tn33aiTi1jkl6H6/source.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Dark overlay */
+.onboard-viewport::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 0.5 = 50% darker */
+  z-index: 0; /* behind text */
+}
+
+.onboard-inner {
+  position: relative;
+  z-index: 1; /* text stays above overlay */
+  max-width: 980px;
+}
 </style>
+
 
 <div class="onboard-viewport">
   <div class="onboard-inner">
     <h4>The Tinkerers</h4>
     <hr>
-    <h2> CSSE Trimester 1 Onboarding Adventure </h2>
+    <h2 class="fadeInUp-animation glowing-text"> CSSE Trimester 1 Onboarding Adventure </h2>
+    <br>
     <button 
         type="button" 
         class="bigbutton" 
         onclick="window.location.href='{{ site.baseurl }}/onboarding/navigation'">
-        LET'S DIVE IN
+        LET'S DIVE IN 🔥
     </button>  
     </div>
 </div>
-
-<center>  
-  <img src="https://www.crio.do/blog/content/images/size/w600/2020/09/Sep_01.png" 
-       alt="Computer image" 
-       style="max-width:600px; width:100%; height:auto;">
-</center>
