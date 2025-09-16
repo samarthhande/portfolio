@@ -74,6 +74,8 @@ HTML implementation of the calculator.
       <div class="calculator-number">0</div>
       <div class="calculator-number">.</div>
       <div class="calculator-equals">=</div>
+      <!--row 5 (new division row to complete set)-->
+      <div class="calculator-operation">÷</div>
   </div>
 </div>
 
@@ -119,7 +121,9 @@ function number (value) { // function to input numbers into the calculator
 // Operation buttons listener
 operations.forEach(button => {
   button.addEventListener("click", function() {
-    operation(button.textContent);
+    let op = button.textContent;
+    if (op === "÷") { op = "/"; } // map ÷ symbol to division operator
+    operation(op);
   });
 });
 
@@ -151,6 +155,9 @@ function calculate (first, second) {
             result = first * second;
             break;
         case "/":
+            if (second === 0) {
+              return "Error"; // handle division by zero safely
+            }
             result = first / second;
             break;
         default: 
