@@ -14,36 +14,90 @@ Hack 2: Add the common math operation that is missing from calculator
 Hack 3: Implement 1 number operation (ie SQRT) 
 -->
 
-<!-- 
-HTML implementation of the calculator. 
--->
-
-<!-- 
-    Style and Action are aligned with HRML class definitions
-    style.css contains majority of style definition (number, operation, clear, and equals)
-    - The div calculator-container sets 4 elements to a row
-    Background is credited to Vanta JS and is implemented at bottom of this page
--->
 <style>
   .calculator-output {
-    /*
-      calulator output
-      top bar shows the results of the calculator;
-      result to take up the entirety of the first row;
-      span defines 4 columns and 1 row
-    */
     grid-column: span 4;
     grid-row: span 1;
-  
     border-radius: 10px;
     padding: 0.25em;
     font-size: 20px;
     border: 5px solid black;
-  
     display: flex;
     align-items: center;
     justify-content: flex-end; /* Right justify result */
+    background: #f2f2f2;
   }
+
+  /* ===== Number Buttons with Fixed Colors ===== */
+  .calculator-number {
+    border-radius: 12px;
+    padding: 0.5em;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .calculator-number:nth-of-type(2)  { background-color: #ff9999; } /* 1 */
+  .calculator-number:nth-of-type(3)  { background-color: #ffcc66; } /* 2 */
+  .calculator-number:nth-of-type(4)  { background-color: #ffff66; } /* 3 */
+  .calculator-number:nth-of-type(6)  { background-color: #99ff99; } /* 4 */
+  .calculator-number:nth-of-type(7)  { background-color: #66ffcc; } /* 5 */
+  .calculator-number:nth-of-type(8)  { background-color: #66ccff; } /* 6 */
+  .calculator-number:nth-of-type(10) { background-color: #cc99ff; } /* 7 */
+  .calculator-number:nth-of-type(11) { background-color: #ff66cc; } /* 8 */
+  .calculator-number:nth-of-type(12) { background-color: #ffb366; } /* 9 */
+  .calculator-number:nth-of-type(14) { background-color: #66ffff; } /* 0 */
+  .calculator-number:nth-of-type(15) { background-color: #ffeb99; } /* . */
+
+  /* ===== Operators, Clear, Equals ===== */
+  .calculator-operation {
+    background-color: #ff6666; /* Red */
+    color: white;
+    border-radius: 12px;
+    padding: 0.5em;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .calculator-operation:nth-of-type(5)  { background-color: #ff6666; } /* + */
+  .calculator-operation:nth-of-type(9)  { background-color: #66a3ff; } /* - */
+  .calculator-operation:nth-of-type(13) { background-color: #66cc66; } /* * */
+  .calculator-operation:nth-of-type(17) { background-color: #b266ff; } /* ÷ */
+
+  .calculator-clear {
+    background-color: #ff3333; /* Bright Red */
+    color: white;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.5em;
+  }
+
+  .calculator-equals {
+    background-color: #ffcc00; /* Gold */
+    color: black;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.5em;
+  }
+
+  /* Hover effect */
+  .calculator-number:hover,
+  .calculator-operation:hover,
+  .calculator-clear:hover,
+  .calculator-equals:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  }
+
   canvas {
     filter: none;
   }
@@ -85,6 +139,7 @@ HTML implementation of the calculator.
 var firstNumber = null;
 var operator = null;
 var nextReady = true;
+
 // build objects containing key elements
 const output = document.getElementById("output");
 const numbers = document.querySelectorAll(".calculator-number");
@@ -100,7 +155,7 @@ numbers.forEach(button => {
 });
 
 // Number action
-function number (value) { // function to input numbers into the calculator
+function number (value) {
     if (value != ".") {
         if (nextReady == true) { 
             output.innerHTML = value;
@@ -122,7 +177,8 @@ function number (value) { // function to input numbers into the calculator
 operations.forEach(button => {
   button.addEventListener("click", function() {
     let op = button.textContent;
-    if (op === "÷") { op = "/"; } // map ÷ symbol to division operator
+    if (op === "÷") { op = "/"; }
+    if (op === "×") { op = "*"; }
     operation(op);
   });
 });
@@ -156,7 +212,7 @@ function calculate (first, second) {
             break;
         case "/":
             if (second === 0) {
-              return "Error"; // handle division by zero safely
+              return "Error";
             }
             result = first / second;
             break;
@@ -205,9 +261,13 @@ document.addEventListener("keydown", function(event) {
     number(key);
   }
 
-  // Handle operations
-  if (key === "+" || key === "-" || key === "*" || key === "/") {
-    operation(key);
+  // Handle operations with more symbol support
+  if (key === "+" || key === "-" || key === "*" || key === "/" || 
+      key === "x" || key === "X" || key === ":" || key === "÷" || key === "×") {
+    let mappedOp = key;
+    if (key === "x" || key === "X" || key === "×") mappedOp = "*";
+    if (key === ":" || key === "÷") mappedOp = "/";
+    operation(mappedOp);
   }
 
   // Handle equals (= or Enter)
@@ -232,9 +292,7 @@ document.addEventListener("keydown", function(event) {
 });
 </script>
 
-<!-- 
-Vanta animations just for fun, load JS onto the page
--->
+<!-- Vanta animations just for fun -->
 <script src="{{site.baseurl}}/assets/js/three.r119.min.js"></script>
 <script src="{{site.baseurl}}/assets/js/vanta.halo.min.js"></script>
 <script src="{{site.baseurl}}/assets/js/vanta.birds.min.js"></script>
@@ -242,18 +300,13 @@ Vanta animations just for fun, load JS onto the page
 <script src="{{site.baseurl}}/assets/js/vanta.rings.min.js"></script>
 
 <script>
-// setup vanta scripts as functions
 var vantaInstances = {
   halo: VANTA.HALO,
   birds: VANTA.BIRDS,
   net: VANTA.NET,
   rings: VANTA.RINGS
 };
-
-// obtain a random vanta function
 var vantaInstance = vantaInstances[Object.keys(vantaInstances)[Math.floor(Math.random() * Object.keys(vantaInstances).length)]];
-
-// run the animation
 vantaInstance({
   el: "#animation",
   mouseControls: true,
