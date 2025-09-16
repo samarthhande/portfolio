@@ -4,6 +4,8 @@ title: Snake Game
 permalink: /snake/
 ---
 
+Here is the writeup for our snake game: <https://compsciteam.github.io/snake/writeup>
+
 <style>
     /* Page and layout */
     body{
