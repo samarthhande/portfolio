@@ -163,12 +163,16 @@ permalink: /snake/
                         <a id="new_game2" class="link-alert" style="font-size:0.95rem;">new game</a>
                     </div>
                     <div class="option-row">
+                        <input id="speed_turtle" type="radio" name="speed" value="220"/>
+                        <label for="speed_turtle">Turtle</label>
                         <input id="speed1" type="radio" name="speed" value="120" checked/>
                         <label for="speed1">Slow</label>
                         <input id="speed2" type="radio" name="speed" value="75"/>
                         <label for="speed2">Normal</label>
                         <input id="speed3" type="radio" name="speed" value="35"/>
                         <label for="speed3">Fast</label>
+                        <input id="speed_troll" type="radio" name="speed" value="8"/>
+                        <label for="speed_troll">Troll</label>
                     </div>
                 </div>
                 <div class="setting-group">
@@ -193,6 +197,15 @@ permalink: /snake/
                         <label for="mode_dark">Dark</label>
                     </div>
                 </div>
+                <div class="setting-group">
+                    <div style="font-weight:600; color:#fff;">Gameplay</div>
+                    <div class="option-row">
+                        <input id="gm_default" type="radio" name="gamemode" value="default" checked/>
+                        <label for="gm_default">Default</label>
+                        <input id="gm_accel" type="radio" name="gamemode" value="accelerate"/>
+                        <label for="gm_accel">Accelerate</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -212,6 +225,7 @@ permalink: /snake/
     const speed_setting = document.getElementsByName("speed");
     const wall_setting = document.getElementsByName("wall");
     const mode_setting = document.getElementsByName("mode");
+    const gamemode_setting = document.getElementsByName("gamemode");
         // HTML Screen IDs (div)
         const SCREEN_MENU = -1, SCREEN_GAME_OVER=1, SCREEN_SETTING=2;
         const screen_menu = document.getElementById("menu");
@@ -238,6 +252,8 @@ permalink: /snake/
     let color_dark_tile = "#a2d148";  // default dark tile
     let color_snake = "#2f00ffff";    // blue snake
     let color_apple = "#ff0000ff";    // red apple
+        // gameplay mode
+        let current_gamemode = 'default';
         /* Display Control */
         /////////////////////////////////////////////////////////////
         // 0 for the game
@@ -346,6 +362,14 @@ permalink: /snake/
                     }
                 });
             }
+            // gameplay mode listeners
+            for(let i = 0; i < gamemode_setting.length; i++){
+                gamemode_setting[i].addEventListener('click', function(){
+                    for(let j = 0; j < gamemode_setting.length; j++){
+                        if(gamemode_setting[j].checked) current_gamemode = gamemode_setting[j].value;
+                    }
+                });
+            }
             // activate window events
             window.addEventListener("keydown", function(evt) {
                 // spacebar detected
@@ -406,6 +430,12 @@ permalink: /snake/
                 altScore(++score);
                 addFood();
                 activeDot(food.x, food.y);
+                // If accelerate gamemode is enabled, speed up slightly on each apple
+                if(current_gamemode === 'accelerate'){
+                    // decrease delay by 5ms per apple, floor at 6ms
+                    const newSpeed = Math.max(6, Number(snake_speed) - 5);
+                    setSnakeSpeed(newSpeed);
+                }
             }
             // Repaint canvas with checkered background
             for(let y = 0; y < canvas.height / BLOCK; y++) {
@@ -507,10 +537,12 @@ permalink: /snake/
             ele_score.innerHTML = String(score_val);
         }
         /////////////////////////////////////////////////////////////
-        // Change the snake speed...
-        // 150 = slow
-        // 100 = normal
-        // 50 = fast
+        // Change the snake speed (delay in ms) - larger = slower
+        // Turtle = 220 (hilariously slow)
+        // Slow   = 120
+        // Normal = 75
+        // Fast   = 35
+        // Troll  = 8   (ridiculously fast)
         let setSnakeSpeed = function(speed_value){
             snake_speed = speed_value;
         }
