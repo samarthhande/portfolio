@@ -40,13 +40,13 @@ permalink: /onboarding/home
     cursor: pointer;
     border: none;
     font-weight: 600;
-    border-radius: 8px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth transition for background color on hover */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
 }
 
 .bigbutton:hover {
-    background-color: #8a2be2; /* Darker green on hover */
-
+    background-color: #8a2be2;
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 </style>
@@ -69,7 +69,7 @@ permalink: /onboarding/home
   <div class="onboard-inner">
     <h4>The Tinkerers</h4>
     <hr>
-    <h1> CSSE Trimester 1 Onboarding Adventure </h1>
+    <h2> CSSE Trimester 1 Onboarding Adventure </h2>
     <button 
         type="button" 
         class="bigbutton" 
