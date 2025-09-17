@@ -55,6 +55,8 @@ permalink: /wordgame
     let startTime = null;
     let finished = false;
     let mistakes = 0;
+    let currentPrompt = ""; // the active prompt text for redraws
+    let caretInterval = null; // interval id for caret redraws
 
     const short_strings = ["The quick brown fox jumps over the lazy dog", "Pack my box with five dozen liquor jugs", "How quickly daft jumping zebras vex", "Jinxed wizards pluck ivy from the quilt", "Bright vixens jump, dozy fowl quack", "Sphinx of black quartz, judge my vow", "Two driven jocks help fax my big quiz", "Five quacking zephyrs jolt my wax bed", "The five boxing wizards jump quickly", "Jackdaws love my big sphinx of quartz", "Quick zephyrs blow, vexing daft Jim", "Zany gnomes fix blighted quartz vases", "Bold foxes jump quickly past the lazy hound", "Mix two dozen plums with five ripe figs", "Cwm fjord bank glyphs vext quiz"];
     const medium_strings = ["Amazingly few discotheques provide jukeboxes", "Back in June we delivered oxygen equipment of the same size", "The public was amazed to view the quickness and dexterity of the juggler", "Jovial zanies quickly gave up their quest for the exotic fish", "The wizard quickly jinxed the gnomes before they vaporized", "All questions asked by five watched experts amaze the judge", "The job requires extra pluck and zeal from every young wage earner", "Crazy Frederick bought many very exquisite opal jewels", "We promptly judged antique ivory buckles for the next prize", "Sixty zippers were quickly picked from the woven jute bag", "The boxed wizards quickly zap a smiling gnome", "A quick movement of the enemy will jeopardize six gunboats", "Mixing jellied plums with zesty lemon makes a fine tart", "The eccentric juggler amazed crowds with odd feats of dexterity", "A dozen movers quickly packed heavy boxes into the van"];
@@ -127,6 +129,24 @@ permalink: /wordgame
                 wordCtx.fillText(promptChar, currentX, lineY);
                 currentX += wordCtx.measureText(promptChar).width;
             }
+
+            // Draw caret if the caret position (input.length) is on this line and game not finished
+            if (!finished) {
+                const caretIndex = input.length;
+                if (caretIndex >= startCharIndex && caretIndex <= endCharIndex) {
+                    // caret X is currentX (after drawn chars on this line)
+                    const caretX = currentX;
+                    const caretY = lineY - 20; // approximate top of text
+                    // Blinking: visible half the time
+                    const showCaret = Math.floor(Date.now() / 500) % 2 === 0;
+                    if (showCaret) {
+                        wordCtx.fillStyle = '#ffffff';
+                        const caretWidth = 2;
+                        const caretHeight = 22;
+                        wordCtx.fillRect(caretX, caretY, caretWidth, caretHeight);
+                    }
+                }
+            }
         });
     }
 
@@ -155,6 +175,8 @@ permalink: /wordgame
 
     function finishGame(prompt, input, startTime) {
         finished = true;
+        // stop caret redraws
+        if (caretInterval) { clearInterval(caretInterval); caretInterval = null; }
         // Compute final mistakes by comparing prompt vs input (count mismatches and missing/extra chars)
         let finalMistakes = 0;
         const maxLen = Math.max(prompt.length, input.length);
@@ -205,6 +227,7 @@ permalink: /wordgame
         mistakes = 0;
         finished = false;
         startTime = null;
+        if (caretInterval) { clearInterval(caretInterval); caretInterval = null; }
         drawText(currentString);
         document.querySelector('.wpm').textContent = '0';
         document.querySelector('.accuracy').textContent = '100%';
@@ -231,8 +254,9 @@ permalink: /wordgame
         const selectedString = stringArray[randomIndex];
         userInput = "";
         mistakes = 0; // Reset mistakes at the start of the game
-        finished = false;
-        startTime = Date.now();
+    finished = false;
+    // Do not start the timer until the user types the first character
+    startTime = null;
         drawText(selectedString);
     // Hide stats while typing
     document.querySelector('.wpm').textContent = '';
@@ -244,8 +268,13 @@ permalink: /wordgame
             if (finished) return;
 
             if (e.key.length === 1 && userInput.length < selectedString.length) {
-                const nextChar = selectedString[userInput.length];
-                // Do not increment mistakes during typing; record the typed character.
+                // Start timer on first character
+                if (!startTime) startTime = Date.now();
+                // Start caret redraw interval
+                if (!caretInterval) {
+                    caretInterval = setInterval(() => drawUserText(selectedString, userInput), 250);
+                }
+                // Record typed character
                 userInput += e.key;
             } else if (e.key === 'Backspace' && userInput.length > 0) {
                 userInput = userInput.slice(0, -1);
@@ -256,8 +285,8 @@ permalink: /wordgame
             updateProgress(selectedString, userInput);
 
             if (userInput.length === selectedString.length) {
-    finishGame(selectedString, userInput, startTime);
-}
+                finishGame(selectedString, userInput, startTime);
+            }
         };
         // init progress
         setProgress(0);
