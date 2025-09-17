@@ -50,6 +50,12 @@ permalink: /wordgame
     const progressFill = document.querySelector('.progress-fill');
     const progressText = document.querySelector('.progress-text');
 
+    // Hide stats initially and clear their text so they won't show while typing
+    const wpmEl = document.querySelector('.wpm');
+    const accEl = document.querySelector('.accuracy');
+    if (wpmEl) { wpmEl.style.visibility = 'hidden'; wpmEl.textContent = ''; }
+    if (accEl) { accEl.style.visibility = 'hidden'; accEl.textContent = ''; }
+
     let currentString = "";
     let userInput = "";
     let startTime = null;
