@@ -149,6 +149,8 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/student/s
         <!-- Game Over -->
         <div id="gameover" class="py-4 text-light screen-card" style="display:none;">
             <p>Game Over — press <span style="background-color: #FFFFFF; color: #000000; padding:2px 6px; border-radius:4px">space</span> to try again</p>
+            <!-- visual game over image -->
+            <img src="{{ site.baseurl }}/images/hacks/snake-gameover.png" alt="Game Over" style="max-width:100%; height:auto; margin-top:12px; border-radius:8px; display:block; margin-left:auto; margin-right:auto;" />
             <a id="new_game1" class="link-alert">New Game</a>
             <a id="setting_menu1" class="link-alert">Settings</a>
         </div>
