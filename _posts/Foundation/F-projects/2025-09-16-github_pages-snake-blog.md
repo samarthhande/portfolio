@@ -47,6 +47,12 @@ We have made multiple quality-of-life improvements and bugfixes for Snake. Below
   - Honestly, the "Troll" and "Turtle" game modes were mainly just trolling. But if you're feeling daring, try to get a single apple at "Troll" speed with walls enabled >:)
   
 
+### Here are our GitHub Issues:
+- #10: <https://github.com/CompSciTeam/student/issues/10>: Page Scrolling, add WASD controls
+- #1: <https://github.com/CompSciTeam/student/issues/1>: Add different game modes
+- #2: <https://github.com/CompSciTeam/student/issues/2>: Improve points UI and the settings/game over screens' UIs
+- #3: <https://github.com/CompSciTeam/student/issues/3>: Change background color scheme + add themes
+- #4: <https://github.com/CompSciTeam/student/issues/4> Change apple color
 
 ## Play our new-and-improved snake game at [compsciteam.github.io/student/snake](https://compsciteam.github.io/student/snake)!
 
