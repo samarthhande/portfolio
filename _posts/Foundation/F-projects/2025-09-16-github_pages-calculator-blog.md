@@ -36,6 +36,8 @@ We made multiple improvements and quality-of-life upgrades for the calculator. H
   - Each number now has its own color to make the interface more lively.
   - Small visual change, but it makes using the calculator more fun.
 
+![An image of the colored buttons]({{site.baseurl}}/images/posts/colored-buttons.png "An image of the colored buttons")
+
 - **Keyboard input**
   - Before, you had to click buttons to type numbers.
   - Now you can type directly on your keyboard, which speeds things up a lot.
