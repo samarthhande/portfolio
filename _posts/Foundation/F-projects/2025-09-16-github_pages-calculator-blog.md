@@ -35,6 +35,14 @@ We made multiple improvements and quality-of-life upgrades for the calculator. H
   - Before, you had to click buttons to type numbers.
   - Now you can type directly on your keyboard, which speeds things up a lot.
 
+- **Square Root Operator**
+  - Before, there was no operator to square root numbers
+  - Now you can click a number, then the square root button and it'll give you the answer.
+
+- **New 67 button**
+  - Before, the only numbers you could put in were 0-9.
+  - Now you can directly choose the number 67.
+
 ## Play our new-and-improved calculator at [compsciteam.github.io/student/calculator](https://compsciteam.github.io/student/calculator)!
 
 Made by Subteam 2: Pranay Kamath, Krish Kelegari, and Samarth Hande (and Vihaan Budhraja, who left us for the lighter side 😂)

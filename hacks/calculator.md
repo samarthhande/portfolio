@@ -51,7 +51,7 @@ Hack 3: Implement 1 number operation (ie SQRT)
   .calculator-number:nth-of-type(12) { background-color: #ffb366; } /* 9 */
   .calculator-number:nth-of-type(14) { background-color: #66ffff; } /* 0 */
   .calculator-number:nth-of-type(15) { background-color: #ffeb99; } /* . */
-  .calculator-number:nth-of-type(19) { background-color: #ffeb99; } /* . */
+  .calculator-number:nth-of-type(20) { background-color: #ffeb99; } /* 67 */
 
   /* ===== Operators, Clear, Equals ===== */
   .calculator-operation {
@@ -133,6 +133,7 @@ Hack 3: Implement 1 number operation (ie SQRT)
       <!--row 5-->
       <div class="calculator-operation">÷</div>
       <div class="calculator-operation sqrt">√</div>
+      <div class="calculator-number">67</div>
   </div>
 </div>
 
