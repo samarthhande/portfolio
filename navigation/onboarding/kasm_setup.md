@@ -196,6 +196,7 @@ permalink: /onboarding/kasm-setup
 		// wire the finish button to the onboarding navigation
 		if(finishBtn){
 			finishBtn.addEventListener('click', ()=>{
+				try{ localStorage.setItem('onboard:completed:kasm-setup','1'); }catch(e){}
 				window.location.href = '{{ site.baseurl }}/onboarding/navigation';
 			});
 		}

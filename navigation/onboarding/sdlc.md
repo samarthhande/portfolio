@@ -1,11 +1,11 @@
 ---
 layout: base
-title: Linux Filesystem Basics
-permalink: /onboarding/linux-filesystem
+title: Software Development Life Cycle (SDLC)
+permalink: /onboarding/sdlc
 ---
 
 <style>
-/* Reuse the stepper styles from KASM setup (kept local to this page) */
+/* Reuse stepper styles used elsewhere */
 .stepper { max-width: 880px; margin: 18px auto; background: rgba(255,255,255,0.02); padding: 18px; border-radius: 10px; }
 .step { display: none; }
 .step.active { display: block; }
@@ -14,16 +14,17 @@ permalink: /onboarding/linux-filesystem
 .cmd { background:#0b1220; color:#9fe2a8; padding:10px 12px; border-radius:6px; font-family: monospace; display:inline-block; }
 .controls { display:flex; gap:8px; align-items:center }
 .arrow { background: #ffffff; color: #0b1220; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-weight: 600; }
+.arrow:disabled{ opacity:0.45 }
 .copy-btn { background: #ffffff; color: #0b1220; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-weight: 600; margin-left:8px; }
 .lesson { background: linear-gradient(180deg,#071127,#0e2946); padding:12px; border-radius:8px; color:#e6eef8 }
 .small { font-size:0.95rem; color:#cbd5e1 }
 </style>
 
-<div class="stepper" id="linux-stepper">
+<div class="stepper" id="sdlc-stepper">
   <div class="stepper-header">
     <div>
-      <div class="step-count">Linux Basics — Step <span id="step-number">1</span> of <span id="step-total">4</span></div>
-      <div class="small">A short guided tour of the Linux filesystem and commands.</div>
+      <div class="step-count">SDLC — Step <span id="step-number">1</span> of <span id="step-total">5</span></div>
+      <div class="small">A short guide to the Software Development Life Cycle for building your GitHub Pages site.</div>
     </div>
     <div class="controls">
       <button class="copy-btn" id="copy-cmd">Copy command</button>
@@ -34,56 +35,49 @@ permalink: /onboarding/linux-filesystem
 
   <div class="steps">
     <div class="step active" data-step="1">
-      <h3>1. What is Linux?</h3>
+      <h3>1. Overview</h3>
       <div class="lesson">
-        <p class="small">Linux is an operating system kernel and, via distributions (Ubuntu, Fedora, Debian, etc.), a complete OS used on servers, desktops, embedded devices, and containers. It's open-source, stable, and widely used in development and production.</p>
+        <p class="small">The development cycle involves iterative steps of running the server, making changes, testing, committing, and syncing changes to GitHub. This ensures that your website is updated and functioning correctly both locally and on GitHub Pages.</p>
       </div>
     </div>
 
     <div class="step" data-step="2">
-      <h3>2. Why is Linux used?</h3>
+      <h3>2. SDLC Workflow</h3>
       <div class="lesson">
-        <p class="small">Linux is popular because it's reliable, efficient, flexible, and free. It's the backbone of most servers, cloud infrastructure, and many developer tools. It provides powerful command-line tools and scripting for automation.</p>
+        <pre class="cmd">Run Server  ->  Make Changes  ->  Commit  ->  Test  ->  Sync</pre>
+        <p class="small">Start the local server, edit files, commit locally, verify the site, then push changes to GitHub.</p>
       </div>
     </div>
 
     <div class="step" data-step="3">
-      <h3>3. Files and folders — "everything is a file"</h3>
+      <h3>3. What is make?</h3>
       <div class="lesson">
-        <p class="small">In Linux, files, directories (folders), devices, and even some system interfaces are represented as files. This unified model makes tools simple and composable: you read, write, and pipe data between programs and files.</p>
-        <p class="small">Examples: configuration files are plain text under <code>/etc</code>, user files live in <code>/home/&lt;user&gt;</code>, and device interfaces appear under <code>/dev</code>.</p>
+        <p class="small">Think of make as a smart task helper for developers. It automates commands you would normally type one by one, starts a localhost server, and runs project tasks listed in the Makefile.</p>
+        <p class="small">To run the default workflow type:</p>
+        <div class="cmd">make</div>
+        <p class="small">Other useful commands: <code>make clean</code>, <code>make stop</code>, <code>make convert</code></p>
       </div>
     </div>
 
     <div class="step" data-step="4">
-      <h3>4. Common commands</h3>
+      <h3>4. VS Code Commit and Sync Workflow</h3>
       <div class="lesson">
-        <p class="small"><strong>ls</strong> — list files (<code>ls -la</code> for details)</p>
-        <p class="small"><strong>cd</strong> — change directory (e.g. <code>cd /path/to/dir</code>)</p>
-        <p class="small"><strong>pwd</strong> — print working directory</p>
-        <p class="small"><strong>mkdir</strong> — make directories (e.g. <code>mkdir -p a/b</code>)</p>
-        <p class="small"><strong>cp</strong> — copy files/directories (e.g. <code>cp source dest</code>)</p>
-        <p class="small"><strong>mv</strong> — move / rename files</p>
-        <p class="small"><strong>rm</strong> — remove files (<code>rm -r</code> for directories — use carefully)</p>
-        <p class="small"><strong>cat</strong> / <strong>less</strong> — view file contents</p>
-        <p class="small"><strong>sudo</strong> — run a command as root (administrator)</p>
-        <p class="small">Try this sequence in order to explore (copy the commands):</p>
-        <pre class="cmd">ls -la
-pwd
-mkdir demo_folder
-cd demo_folder
-touch hello.txt
-ls -la
-cat hello.txt
-</pre>
+        <p class="small">Save files in VS Code, stage and commit via the Source Control pane, then push your commits to GitHub. Always test locally (make) before pushing — this prevents broken site builds on GitHub Pages.</p>
+        <p class="small">Detailed steps:</p>
+        <ol class="small">
+          <li>Edit files and save (Ctrl/Cmd+S)</li>
+          <li>Open Source Control, stage files, add a commit message, and commit</li>
+          <li>Open a terminal, ensure your venv is active, run <code>make</code> and verify the local site</li>
+          <li>Push to the remote repository to trigger GitHub Pages deployment</li>
+        </ol>
       </div>
     </div>
 
     <div class="step" data-step="5">
       <h3>You're done!</h3>
       <div class="lesson" style="text-align:center;">
-        <p class="small">Nice work — you've completed the quick Linux filesystem tour.</p>
-        <p class="small">Click the button below to return to the onboarding navigation.</p>
+        <p class="small">You're familiar with the SDLC: run the server, edit, test, commit, and sync. Follow this cycle whenever you make changes to your site.</p>
+        <p class="small">Click the button below to mark this tutorial complete and return to onboarding navigation.</p>
         <button class="arrow" id="finish-btn" style="margin-top:10px;">You're done — go to onboarding navigation</button>
       </div>
       <div style="height:0; overflow:visible; position:relative;"></div>
@@ -94,7 +88,7 @@ cat hello.txt
 
 <script>
 (function(){
-  const steps = Array.from(document.querySelectorAll('#linux-stepper .step'));
+  const steps = Array.from(document.querySelectorAll('#sdlc-stepper .step'));
   const total = steps.length;
   const stepNumber = document.getElementById('step-number');
   const stepTotal = document.getElementById('step-total');
@@ -114,10 +108,20 @@ cat hello.txt
     next.disabled = (i === total-1);
   }
 
+  copyBtn.addEventListener('click', ()=>{
+    const codeEl = steps[idx].querySelector('.cmd');
+    if(!codeEl) return;
+    const text = codeEl.textContent.trim();
+    navigator.clipboard.writeText(text).then(()=>{
+      copyBtn.textContent = 'Copied!';
+      setTimeout(()=> copyBtn.textContent = 'Copy command', 1200);
+    });
+  });
+
   prev.addEventListener('click', ()=>{ if(idx>0) idx--; show(idx); maybeCelebrate(idx); });
   next.addEventListener('click', ()=>{ if(idx<total-1) idx++; show(idx); maybeCelebrate(idx); });
 
-  // simple confetti impl (small, dependency-free)
+  // simple confetti impl
   function burstConfetti(x, y, count){
     const colors = ['#ff6b6b','#ffd93d','#6be3a8','#6bb6ff','#c58cff'];
     for(let i=0;i<count;i++){
@@ -145,7 +149,7 @@ cat hello.txt
   const finishBtn = document.getElementById('finish-btn');
   function maybeCelebrate(i){
     if(i === total-1){
-      const rect = document.getElementById('linux-stepper').getBoundingClientRect();
+      const rect = document.getElementById('sdlc-stepper').getBoundingClientRect();
       burstConfetti(rect.left + rect.width/2, rect.top + 40, 36);
       setTimeout(()=> burstConfetti(rect.left + rect.width/2 - 80, rect.top + 20, 18), 300);
       setTimeout(()=> burstConfetti(rect.left + rect.width/2 + 80, rect.top + 20, 18), 600);
@@ -154,20 +158,10 @@ cat hello.txt
 
   if(finishBtn){
     finishBtn.addEventListener('click', ()=>{
-      try{ localStorage.setItem('onboard:completed:linux-filesystem','1'); }catch(e){}
+      try{ localStorage.setItem('onboard:completed:sdlc','1'); }catch(e){}
       window.location.href = '{{ site.baseurl }}/onboarding/navigation';
     });
   }
-
-  copyBtn.addEventListener('click', ()=>{
-    const codeEl = steps[idx].querySelector('.cmd');
-    if(!codeEl) return;
-    const text = codeEl.textContent.trim();
-    navigator.clipboard.writeText(text).then(()=>{
-      copyBtn.textContent = 'Copied!';
-      setTimeout(()=> copyBtn.textContent = 'Copy command', 1200);
-    });
-  });
 
   // initialize
   show(0);

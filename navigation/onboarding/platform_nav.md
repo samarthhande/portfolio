@@ -10,6 +10,7 @@ permalink: /onboarding/navigation
 .tile { background:#0b1220; color:#e6eef8; padding:20px; border-radius:10px; border:2px solid rgba(255,255,255,0.03); cursor:pointer; font-weight:700; box-shadow: 0 6px 18px rgba(2,6,23,0.5); user-select:none; }
 .tile:focus { outline:3px solid rgba(99,102,241,0.22); }
 .tile.selected { background: #ffffff; color:#071127; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(2,6,23,0.6); }
+.tile.done { background: linear-gradient(90deg,#0f5132,#0d3e2a); color: #dff6e1; border-color: rgba(107,189,129,0.18); box-shadow: 0 6px 18px rgba(6,55,12,0.45); }
 .tile .label { display:block; font-size:0.85rem; color:inherit; opacity:0.8; }
 .controls-small { color:#cbd5e1; font-size:0.95rem; margin-top:6px }
 .hint { color:#9fe2a8; font-family: monospace; background:#071127; display:inline-block; padding:6px 8px; border-radius:6px; margin-top:10px }
@@ -81,6 +82,18 @@ permalink: /onboarding/navigation
 
 		// click handlers
 		tiles.forEach(t => {
+			// decorate tiles based on completion stored in localStorage
+			(function decorateDone(tile){
+				try{
+					const href = tile.dataset.href || '';
+					if(!href) return;
+					const parts = href.replace(/\/$/, '').split('/');
+					const key = parts[parts.length-1];
+					if(localStorage.getItem('onboard:completed:' + key)){
+						tile.classList.add('done');
+					}
+				}catch(e){ /* ignore */ }
+			})(t);
 			t.addEventListener('click', ()=>{
 				const row = Number(t.dataset.row), col = Number(t.dataset.col);
 				r = row; c = col; setSelected(r,c); activateTile(r,c);
