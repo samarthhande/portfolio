@@ -220,24 +220,31 @@ permalink: /wordgame
         <p style="font-size: 1.5em;"><strong>WPM:</strong> <span style="color: #6bb6ff;">${wpm}</span></p>
     <p style="font-size: 1.5em;"><strong>Accuracy:</strong> <span style="color: #6bb6ff;">${accuracy}</span></p>
     <p style="font-size: 1.2em; margin-top: 10px;"><strong>Mistakes:</strong> <span style="color: #ff6b6b;">${mistakes}</span></p>
-        <button id="playAgain" style="margin-top: 30px; padding: 10px 20px; font-size: 1em; cursor: pointer; border: none; background-color: #007BFF; color: white; border-radius: 5px;">Play Again</button>
+    <button id="playAgain" style="margin-top: 30px; padding: 10px 20px; font-size: 1em; cursor: pointer; border: none; background-color: #007BFF; color: white; border-radius: 5px;">Next</button>
     `;
 
     document.body.appendChild(finishScreen);
 
-    // Add an event listener to the "Play Again" button
+    // Add an event listener to the "Next" button: clear scores and let the user pick again
     document.getElementById('playAgain').addEventListener('click', () => {
         document.body.removeChild(finishScreen);
-        // Reset the game state
+        // Clear the game state but do NOT start a new prompt automatically.
         userInput = '';
         mistakes = 0;
         finished = false;
         startTime = null;
+        // Stop caret blinking if running
         if (caretInterval) { clearInterval(caretInterval); caretInterval = null; }
-        drawText(currentString);
-        document.querySelector('.wpm').textContent = '0';
-        document.querySelector('.accuracy').textContent = '100%';
+        // Clear the canvas (no prompt shown) and reset progress
+        drawText('');
         setProgress(0);
+        // Hide and clear stats so user can pick again without seeing old scores
+        const w = document.querySelector('.wpm');
+        const a = document.querySelector('.accuracy');
+        if (w) { w.style.visibility = 'hidden'; w.textContent = ''; }
+        if (a) { a.style.visibility = 'hidden'; a.textContent = ''; }
+        // Clear current selection so the user is encouraged to pick a new length
+        currentString = '';
     });
 }
 
