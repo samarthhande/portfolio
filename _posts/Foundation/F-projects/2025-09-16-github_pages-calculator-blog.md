@@ -23,6 +23,9 @@ We made multiple improvements and quality-of-life upgrades for the calculator. H
   - Division was missing before—now it’s here!
   - All four basic operations are fully supported.
 
+![An image of the division Button]({{site.baseurl}}/images/posts/divbutton.png "An image of the division Button")
+
+
 - **Right-aligned results**
   - Numbers now align to the right, just like on a real calculator.
   - Makes reading long numbers easier and cleaner.
