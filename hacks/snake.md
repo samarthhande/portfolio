@@ -490,14 +490,68 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
             // Recursive call after speed delay, déjà vu
             // move golden fruit between frames (simple bouncing logic)
             if(goldenFood.active){
-                // advance position by velocity
-                goldenFood.x += goldenFood.vx;
-                goldenFood.y += goldenFood.vy;
-                // bounce off edges (reverse velocity when hitting walls)
-                if(goldenFood.x < 0){ goldenFood.x = 0; goldenFood.vx *= -1; }
-                if(goldenFood.x >= canvas.width / BLOCK){ goldenFood.x = (canvas.width / BLOCK) - 1; goldenFood.vx *= -1; }
-                if(goldenFood.y < 0){ goldenFood.y = 0; goldenFood.vy *= -1; }
-                if(goldenFood.y >= canvas.height / BLOCK){ goldenFood.y = (canvas.height / BLOCK) - 1; goldenFood.vy *= -1; }
+                // compute prospective next position
+                let nextX = goldenFood.x + goldenFood.vx;
+                let nextY = goldenFood.y + goldenFood.vy;
+
+                // helper: returns true if (x,y) overlaps any snake segment
+                const collidesWithSnake = (x, y) => {
+                    for (let si = 0; si < snake.length; si++){
+                        if (snake[si].x === x && snake[si].y === y) return true;
+                    }
+                    return false;
+                };
+
+                // bounce off edges first
+                if(nextX < 0){ nextX = 0; goldenFood.vx *= -1; }
+                if(nextX >= canvas.width / BLOCK){ nextX = (canvas.width / BLOCK) - 1; goldenFood.vx *= -1; }
+                if(nextY < 0){ nextY = 0; goldenFood.vy *= -1; }
+                if(nextY >= canvas.height / BLOCK){ nextY = (canvas.height / BLOCK) - 1; goldenFood.vy *= -1; }
+
+                // If the next position would collide with the snake, attempt to bounce
+                if(collidesWithSnake(nextX, nextY)){
+                    // invert horizontal and test
+                    let altX = goldenFood.x - goldenFood.vx; // try reversing x
+                    let altY = goldenFood.y - goldenFood.vy; // try reversing y
+                    let tried = false;
+                    // try flipping vx
+                    if(!collidesWithSnake(goldenFood.x - goldenFood.vx, goldenFood.y)){
+                        goldenFood.vx *= -1;
+                        nextX = goldenFood.x + goldenFood.vx;
+                        nextY = goldenFood.y;
+                        tried = true;
+                    }
+                    // try flipping vy
+                    if(!tried && !collidesWithSnake(goldenFood.x, goldenFood.y - goldenFood.vy)){
+                        goldenFood.vy *= -1;
+                        nextX = goldenFood.x;
+                        nextY = goldenFood.y + goldenFood.vy;
+                        tried = true;
+                    }
+                    // try swapping directions (turn) if still colliding
+                    if(!tried){
+                        const swapVx = goldenFood.vy;
+                        const swapVy = goldenFood.vx;
+                        if(!collidesWithSnake(goldenFood.x + swapVx, goldenFood.y + swapVy)){
+                            goldenFood.vx = swapVx;
+                            goldenFood.vy = swapVy;
+                            nextX = goldenFood.x + goldenFood.vx;
+                            nextY = goldenFood.y + goldenFood.vy;
+                            tried = true;
+                        }
+                    }
+                    // if after attempts still colliding, deactivate golden to avoid stuck state
+                    if(!tried && collidesWithSnake(nextX, nextY)){
+                        console.debug('golden stuck on snake, deactivating');
+                        goldenFood.active = false;
+                    }
+                }
+
+                // finally apply the computed next position
+                if(goldenFood.active){
+                    goldenFood.x = nextX;
+                    goldenFood.y = nextY;
+                }
             }
 
             setTimeout(mainLoop, snake_speed);
@@ -569,7 +623,7 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/snake/wri
         /////////////////////////////////////////////////////////////
         let addFood = function(){
                     // If Fruit Frenzy mode is active, occasionally spawn a moving golden fruit
-                    if(current_gamemode === 'fruit_frenzy' && Math.random() < 0.25 && !goldenFood.active){
+                    if(current_gamemode === 'fruit_frenzy' && Math.random() < 0.4 && !goldenFood.active){
                         // attempt to place golden fruit not on the snake
                         let gx = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
                         let gy = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));

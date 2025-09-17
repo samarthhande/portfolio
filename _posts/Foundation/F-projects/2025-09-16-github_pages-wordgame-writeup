@@ -9,16 +9,19 @@ permalink: /wordgame/writeup
 breadcrumb: true
 ---
 
-
-
 ### Our changes
 
-We have made multiple quality-of-life improvements for the Word Game. Below is a list of all the modifications we made.
+We have made multiple quality-of-life improvements and mechanic redesigns for the Word Game. Below is a list of all the modifications we made.
 
 - Changed the font of the text to Times New Roman
-- Added a gradient progress bar
+- Added a gradient progress bar to display your progress
+- Game now handles accuracy and WPM differently:
+  - The way it worked previously is that you had to have the word typed correctly at the end and fix any mistakes you made. The accuracy was just the number of mistakes you made.
+  - Now, you can finish with typos. Your accuracy is the FINAL result, and WPM is computed at the end to avoid strange 1,000 WPM values at the beginning.
+  - This is a more intuitive system that matches most typing tools online, like MonkeyType.
+- Missed letters show up as red but as the same letter to prevent jumbled, unreadable, overlapping text
+- Cleaned up the "string length selection" menu
 
-
-## Play our new-and-improved word game at [compsciteam.github.io/student/wordgame](https://compsciteam.github.io/student/wordgame)!
+## Play our word game at [compsciteam.github.io/student/wordgame](https://compsciteam.github.io/student/wordgame)!
 
 Made by Subteam 1: Anish Gupta, James Blazek, and Vihaan Budharaja

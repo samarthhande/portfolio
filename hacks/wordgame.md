@@ -56,9 +56,9 @@ permalink: /wordgame
     let finished = false;
     let mistakes = 0;
 
-    const short_strings = ["The quick brown fox jumps over the lazy dog", "Pack my box with five dozen liquor jugs", "How quickly daft jumping zebras vex", "Jinxed wizards pluck ivy from the quilt", "Bright vixens jump, dozy fowl quack", "Sphinx of black quartz, judge my vow", "Two driven jocks help fax my big quiz", "Five quacking zephyrs jolt my wax bed", "The five boxing wizards jump quickly", "Jackdaws love my big sphinx of quartz"];
-    const medium_strings = ["Amazingly few discotheques provide jukeboxes", "Back in June we delivered oxygen equipment of the same size", "The public was amazed to view the quickness and dexterity of the juggler", "Jovial zanies quickly gave up their quest for the exotic fish", "The wizard quickly jinxed the gnomes before they vaporized", "All questions asked by five watched experts amaze the judge", "The job requires extra pluck and zeal from every young wage earner", "Crazy Frederick bought many very exquisite opal jewels", "We promptly judged antique ivory buckles for the next prize", "Sixty zippers were quickly picked from the woven jute bag"];
-    const long_strings = ["The wizard quickly jinxed the gnomes before they vaporized just beyond the village gates", "Heavy boxes perform quick waltzes and jigs while the young fox plays his fiddle nearby", "My faxed joke won a pager in the cable TV quiz show, making everyone in the room laugh", "Back in the quaint valley, jovial hikers mixed exotic fruit juice and warm bread by the campfire", "The public was amazed to view the quickness and dexterity of the juggler as he performed his tricks", "Amazingly few discotheques provide jukeboxes, making it hard for music lovers to enjoy their favorite tunes", "We promptly judged antique ivory buckles for the next prize in the competition, impressing all the judges", "Crazy Frederick bought many very exquisite opal jewels from the ancient market in the old town square", "Sixty zippers were quickly picked from the woven jute bag by the skilled tailor in the bustling city", "Back in June we delivered oxygen equipment of the same size and shape to all the hospitals in the region"];
+    const short_strings = ["The quick brown fox jumps over the lazy dog", "Pack my box with five dozen liquor jugs", "How quickly daft jumping zebras vex", "Jinxed wizards pluck ivy from the quilt", "Bright vixens jump, dozy fowl quack", "Sphinx of black quartz, judge my vow", "Two driven jocks help fax my big quiz", "Five quacking zephyrs jolt my wax bed", "The five boxing wizards jump quickly", "Jackdaws love my big sphinx of quartz", "Quick zephyrs blow, vexing daft Jim", "Zany gnomes fix blighted quartz vases", "Bold foxes jump quickly past the lazy hound", "Mix two dozen plums with five ripe figs", "Cwm fjord bank glyphs vext quiz"];
+    const medium_strings = ["Amazingly few discotheques provide jukeboxes", "Back in June we delivered oxygen equipment of the same size", "The public was amazed to view the quickness and dexterity of the juggler", "Jovial zanies quickly gave up their quest for the exotic fish", "The wizard quickly jinxed the gnomes before they vaporized", "All questions asked by five watched experts amaze the judge", "The job requires extra pluck and zeal from every young wage earner", "Crazy Frederick bought many very exquisite opal jewels", "We promptly judged antique ivory buckles for the next prize", "Sixty zippers were quickly picked from the woven jute bag", "The boxed wizards quickly zap a smiling gnome", "A quick movement of the enemy will jeopardize six gunboats", "Mixing jellied plums with zesty lemon makes a fine tart", "The eccentric juggler amazed crowds with odd feats of dexterity", "A dozen movers quickly packed heavy boxes into the van"];
+    const long_strings = ["The wizard quickly jinxed the gnomes before they vaporized just beyond the village gates", "Heavy boxes perform quick waltzes and jigs while the young fox plays his fiddle nearby", "My faxed joke won a pager in the cable TV quiz show, making everyone in the room laugh", "Back in the quaint valley, jovial hikers mixed exotic fruit juice and warm bread by the campfire", "The public was amazed to view the quickness and dexterity of the juggler as he performed his tricks", "Amazingly few discotheques provide jukeboxes, making it hard for music lovers to enjoy their favorite tunes", "We promptly judged antique ivory buckles for the next prize in the competition, impressing all the judges", "Crazy Frederick bought many very exquisite opal jewels from the ancient market in the old town square", "Sixty zippers were quickly picked from the woven jute bag by the skilled tailor in the bustling city", "Back in June we delivered oxygen equipment of the same size and shape to all the hospitals in the region", "In the sleepy coastal town the fishermen mended their nets beneath a crimson sunset while gulls wheeled overhead", "Under a canopy of stars the traveling minstrel strummed his lute and told tales of distant lands to eager listeners", "During the harvest festival the village square filled with laughter as families shared spiced bread and warm cider by the bonfire", "A curious apprentice studied ancient tomes in the candlelit library, dreaming of spells that might mend broken things", "Across the prairie the herd thundering past left clouds of dust and the sun glinted on a thousand tiny hooves"];
 
     function drawText(text) {
         wordCtx.clearRect(0, 0, wordCanvas.width, wordCanvas.height);
@@ -119,11 +119,12 @@ permalink: /wordgame
             const endCharIndex = startCharIndex + line.length;
     
             for (let i = startCharIndex; i < Math.min(input.length, endCharIndex); i++) {
-                const char = input[i];
+                const typedChar = input[i];
                 const promptChar = prompt[i] || '';
-                const color = char === promptChar ? 'green' : 'red';
+                // Show the prompt character itself; color green if correct, red if incorrect.
+                const color = typedChar === promptChar ? 'green' : 'red';
                 wordCtx.fillStyle = color;
-                wordCtx.fillText(char, currentX, lineY);
+                wordCtx.fillText(promptChar, currentX, lineY);
                 currentX += wordCtx.measureText(promptChar).width;
             }
         });
@@ -132,23 +133,39 @@ permalink: /wordgame
     function updateStats(prompt, input, startTime) {
         // Accuracy calculation
         const totalTyped = input.length;
-        const accuracy = totalTyped > 0 ? Math.round(((totalTyped - mistakes) / totalTyped) * 100) : 100;
-        document.querySelector('.accuracy').textContent = accuracy + '%';
+        // Only show stats when the game has finished
+        if (finished) {
+            const accuracy = totalTyped > 0 ? Math.round(((totalTyped - mistakes) / totalTyped) * 100) : 100;
+            document.querySelector('.accuracy').textContent = accuracy + '%';
 
-        // WPM calculation
-        if (startTime) {
-            const elapsed = (Date.now() - startTime) / 1000 / 60; // minutes
-            const words = prompt.length / 5;
-            const wpm = elapsed > 0 ? Math.round(words / elapsed) : 0;
-            document.querySelector('.wpm').textContent = wpm;
-        } else {
-            document.querySelector('.wpm').textContent = '0';
+            // WPM calculation
+            if (startTime) {
+                const elapsed = (Date.now() - startTime) / 1000 / 60; // minutes
+                const words = prompt.length / 5;
+                const wpm = elapsed > 0 ? Math.round(words / elapsed) : 0;
+                document.querySelector('.wpm').textContent = wpm;
+            } else {
+                document.querySelector('.wpm').textContent = '0';
+            }
+            // Ensure stats are visible
+            document.querySelector('.wpm').style.visibility = 'visible';
+            document.querySelector('.accuracy').style.visibility = 'visible';
         }
     }
 
     function finishGame(prompt, input, startTime) {
-    finished = true;
-    updateStats(prompt, input, startTime);
+        finished = true;
+        // Compute final mistakes by comparing prompt vs input (count mismatches and missing/extra chars)
+        let finalMistakes = 0;
+        const maxLen = Math.max(prompt.length, input.length);
+        for (let i = 0; i < maxLen; i++) {
+            if (prompt[i] !== input[i]) finalMistakes++;
+        }
+        mistakes = finalMistakes;
+        updateStats(prompt, input, startTime);
+        // Reveal stats
+        document.querySelector('.wpm').style.visibility = 'visible';
+        document.querySelector('.accuracy').style.visibility = 'visible';
     setProgress(100);
 
     const wpm = document.querySelector('.wpm').textContent;
@@ -173,7 +190,8 @@ permalink: /wordgame
         <h2 style="color: #6be3a8;">🎉 Game Finished!</h2>
         <p style="font-size: 2em; margin: 20px;">Your results are in!</p>
         <p style="font-size: 1.5em;"><strong>WPM:</strong> <span style="color: #6bb6ff;">${wpm}</span></p>
-        <p style="font-size: 1.5em;"><strong>Accuracy:</strong> <span style="color: #6bb6ff;">${accuracy}</span></p>
+    <p style="font-size: 1.5em;"><strong>Accuracy:</strong> <span style="color: #6bb6ff;">${accuracy}</span></p>
+    <p style="font-size: 1.2em; margin-top: 10px;"><strong>Mistakes:</strong> <span style="color: #ff6b6b;">${mistakes}</span></p>
         <button id="playAgain" style="margin-top: 30px; padding: 10px 20px; font-size: 1em; cursor: pointer; border: none; background-color: #007BFF; color: white; border-radius: 5px;">Play Again</button>
     `;
 
@@ -216,17 +234,18 @@ permalink: /wordgame
         finished = false;
         startTime = Date.now();
         drawText(selectedString);
-        document.querySelector('.wpm').textContent = '0';
-        document.querySelector('.accuracy').textContent = '100%';
+    // Hide stats while typing
+    document.querySelector('.wpm').textContent = '';
+    document.querySelector('.accuracy').textContent = '';
+    document.querySelector('.wpm').style.visibility = 'hidden';
+    document.querySelector('.accuracy').style.visibility = 'hidden';
 
         document.onkeydown = function (e) {
             if (finished) return;
 
             if (e.key.length === 1 && userInput.length < selectedString.length) {
                 const nextChar = selectedString[userInput.length];
-                if (e.key !== nextChar) {
-                    mistakes++; // Increment mistakes for incorrect characters
-                }
+                // Do not increment mistakes during typing; record the typed character.
                 userInput += e.key;
             } else if (e.key === 'Backspace' && userInput.length > 0) {
                 userInput = userInput.slice(0, -1);
@@ -256,52 +275,100 @@ permalink: /wordgame
     }
 
     optionsButton.addEventListener('click', () => {
-        const menu = document.createElement('div');
-        menu.style.position = 'absolute';
-        menu.style.width = '300px'; // Set a fixed width for the menu
-        menu.style.border = '1px solid #160816ff';
-        menu.style.backgroundColor = '#ae5ef8ff';
-        menu.style.padding = '10px';
-        menu.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
-        menu.style.textAlign = 'center'; // Center-align the text inside the menu
-    
-        // Center the menu in the middle of the screen
-        menu.style.top = `${window.innerHeight / 2 - 50}px`; // Adjust for menu height
-        menu.style.left = `${window.innerWidth / 2 - 100}px`; // Adjust for menu width
-    
-        const shortOption = document.createElement('button');
-        shortOption.textContent = 'Short Strings';
-        shortOption.style.display = 'block';
-        shortOption.style.margin = '10px 0';
-        shortOption.addEventListener('click', () => {
-            currentString = "short_strings";
-            startGame();
-            document.body.removeChild(menu);
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.backgroundColor = 'rgba(0,0,0,0.6)';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.zIndex = '2000';
+
+        // Create modal
+        const modal = document.createElement('div');
+        modal.style.width = '360px';
+        modal.style.maxWidth = '90%';
+        modal.style.background = 'linear-gradient(180deg,#1b1b2f,#2d3350)';
+        modal.style.borderRadius = '12px';
+        modal.style.padding = '18px';
+        modal.style.boxShadow = '0 10px 30px rgba(0,0,0,0.4)';
+        modal.style.color = '#fff';
+        modal.style.textAlign = 'center';
+
+        // Close (X) button
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '&times;';
+        closeBtn.setAttribute('aria-label', 'Close');
+        closeBtn.style.position = 'absolute';
+        closeBtn.style.top = '12px';
+        closeBtn.style.right = '18px';
+        closeBtn.style.background = 'transparent';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#fff';
+        closeBtn.style.fontSize = '22px';
+        closeBtn.style.cursor = 'pointer';
+
+        const title = document.createElement('h3');
+        title.textContent = 'Select String Length';
+        title.style.marginTop = '4px';
+        title.style.marginBottom = '12px';
+        title.style.fontWeight = '700';
+
+        const createOptionButton = (text, val) => {
+            const b = document.createElement('button');
+            b.textContent = text;
+            b.style.display = 'block';
+            b.style.width = '100%';
+            b.style.margin = '8px 0';
+            b.style.padding = '12px 10px';
+            b.style.borderRadius = '8px';
+            b.style.border = '1px solid rgba(255,255,255,0.08)';
+            b.style.background = 'linear-gradient(90deg,#6be3a8,#6bb6ff)';
+            b.style.color = '#071127';
+            b.style.fontWeight = '700';
+            b.style.cursor = 'pointer';
+            b.addEventListener('mouseenter', () => b.style.transform = 'translateY(-2px)');
+            b.addEventListener('mouseleave', () => b.style.transform = 'translateY(0)');
+            b.addEventListener('click', () => {
+                currentString = val;
+                startGame();
+                document.body.removeChild(overlay);
+                window.removeEventListener('keydown', escHandler);
+            });
+            return b;
+        };
+
+        const shortOption = createOptionButton('Short Strings', 'short_strings');
+        const mediumOption = createOptionButton('Medium Strings', 'medium_strings');
+        const longOption = createOptionButton('Long Strings', 'long_strings');
+
+        // Escape handler to close modal
+        const escHandler = (ev) => {
+            if (ev.key === 'Escape') {
+                if (document.body.contains(overlay)) document.body.removeChild(overlay);
+                window.removeEventListener('keydown', escHandler);
+            }
+        };
+
+        closeBtn.addEventListener('click', () => {
+            if (document.body.contains(overlay)) document.body.removeChild(overlay);
+            window.removeEventListener('keydown', escHandler);
         });
-    
-        const mediumOption = document.createElement('button');
-        mediumOption.textContent = 'Medium Strings';
-        mediumOption.style.display = 'block';
-        mediumOption.style.margin = '10px 0';
-        mediumOption.addEventListener('click', () => {
-            currentString = "medium_strings";
-            startGame();
-            document.body.removeChild(menu);
-        });
-    
-        const longOption = document.createElement('button');
-        longOption.textContent = 'Long Strings';
-        longOption.style.display = 'block';
-        longOption.style.margin = '10px 0';
-        longOption.addEventListener('click', () => {
-            currentString = "long_strings";
-            startGame();
-            document.body.removeChild(menu);
-        });
-    
-        menu.appendChild(shortOption);
-        menu.appendChild(mediumOption);
-        menu.appendChild(longOption);
-        document.body.appendChild(menu);
+
+        modal.appendChild(closeBtn);
+        modal.appendChild(title);
+        modal.appendChild(shortOption);
+        modal.appendChild(mediumOption);
+        modal.appendChild(longOption);
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+
+        // Focus and esc listener
+        window.addEventListener('keydown', escHandler);
+        shortOption.focus();
     });
 </script>
