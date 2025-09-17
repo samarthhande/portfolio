@@ -30,6 +30,8 @@ We made multiple improvements and quality-of-life upgrades for the calculator. H
   - Numbers now align to the right, just like on a real calculator.
   - Makes reading long numbers easier and cleaner.
 
+![An image of the right aligned]({{site.baseurl}}/images/posts/right-align-image.png "An image of the right aligned")
+
 - **Colored numbers**
   - Each number now has its own color to make the interface more lively.
   - Small visual change, but it makes using the calculator more fun.
