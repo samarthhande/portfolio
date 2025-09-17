@@ -454,8 +454,8 @@ Here is the writeup for our snake game: <https://compsciteam.github.io/student/s
             if(goldenFood.active && checkBlock(snake[0].x, snake[0].y, goldenFood.x, goldenFood.y)){
                 // grow snake by one block
                 snake[snake.length] = {x: snake[0].x, y: snake[0].y};
-                // award 3 points for golden apple
-                score += 3;
+                // award 10 points for golden apple
+                score += 10;
                 altScore(score);
                 // deactivate golden and respawn normal food
                 goldenFood.active = false;
