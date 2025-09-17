@@ -69,6 +69,7 @@ Hack 3: Implement 1 number operation (ie SQRT)
   .calculator-operation:nth-of-type(9)  { background-color: #66a3ff; } /* - */
   .calculator-operation:nth-of-type(13) { background-color: #66cc66; } /* * */
   .calculator-operation:nth-of-type(17) { background-color: #b266ff; } /* ÷ */
+  .calculator-operation.sqrt { background-color: #ffaa33; } /* √ */
 
   .calculator-clear {
     background-color: #ff3333; /* Bright Red */
@@ -129,9 +130,9 @@ Hack 3: Implement 1 number operation (ie SQRT)
       <div class="calculator-number">0</div>
       <div class="calculator-number">.</div>
       <div class="calculator-equals">=</div>
-      <!--row 5 (new division row to complete set)-->
+      <!--row 5-->
       <div class="calculator-operation">÷</div>
-      <div class="calculator-number">67</div>
+      <div class="calculator-operation sqrt">√</div>
   </div>
 </div>
 
@@ -181,6 +182,7 @@ operations.forEach(button => {
     let op = button.textContent;
     if (op === "÷") { op = "/"; }
     if (op === "×") { op = "*"; }
+    if (op === "√") { sqrtOperation(); return; }
     operation(op);
   });
 });
@@ -222,6 +224,21 @@ function calculate (first, second) {
             break;
     }
     return result;
+}
+
+// Square root operation
+function sqrtOperation() {
+    let current = parseFloat(output.innerHTML);
+    if (current < 0) {
+      output.innerHTML = "Error";
+      nextReady = true;
+      return;
+    }
+    let result = Math.sqrt(current);
+    output.innerHTML = result.toString();
+    nextReady = true;
+    firstNumber = null;
+    operator = null;
 }
 
 // Equals button listener
@@ -270,6 +287,11 @@ document.addEventListener("keydown", function(event) {
     if (key === "x" || key === "X" || key === "×") mappedOp = "*";
     if (key === ":" || key === "÷") mappedOp = "/";
     operation(mappedOp);
+  }
+
+  // Handle square root with 'r' key
+  if (key === "r" || key === "R") {
+    sqrtOperation();
   }
 
   // Handle equals (= or Enter)
