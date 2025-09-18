@@ -9,6 +9,10 @@ permalink: /wordgame/writeup
 breadcrumb: true
 ---
 
+### Demo!
+
+![]({{site.baseurl}}/images/hacks/WordGameDemo.mp4)
+
 ### Our changes
 
 We have made multiple quality-of-life improvements and mechanic redesigns for the Word Game. Below is a list of all the modifications we made.
