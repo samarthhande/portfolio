@@ -4,9 +4,13 @@ title: Word Game
 permalink: /wordgame
 ---
 
-<center><a href=https://compsciteam.github.io/student/wordgame/writeup><strong>
+<center>
+<a href="https://compsciteam.github.io/student/wordgame/writeup">
+<strong>
 Writeup
-</center></a></strong>
+</strong>
+</a>
+</center>
 
 <style>
     #wordCanvas { 
