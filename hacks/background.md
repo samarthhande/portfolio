@@ -86,8 +86,8 @@ permalink: /background
     class Player extends GameObject {
       constructor(image, gameWorld) {
         // Scale player to half its original image size
-        const width = image.naturalWidth * 1.1;
-        const height = image.naturalHeight * 1.1;
+        const width = image.naturalWidth * 1.3;
+        const height = image.naturalHeight * 1.3;
         const x = (gameWorld.width - width) / 2; // Center horizontally
         const y = (gameWorld.height - height) / 2; // Center vertically
         super(image, width, height, x, y);
