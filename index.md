@@ -103,7 +103,6 @@ hide: true
 <a href="{{site.baseurl}}/wordgame">
     <img src="{{site.baseurl}}/images/index/wordgame.png" alt="Word Game" class="project-link">
 </a>
-</div>
 
 <br>
 
