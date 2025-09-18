@@ -2,7 +2,7 @@
 layout: opencs
 title: Background with Object
 description: Use JavaScript to have an in motion background.
-sprite: images/posts/buzz-lightyear.png
+sprite: images/posts/buzz-lightyear2.png
 background: images/platformer/backgrounds/alien_planet2.jpg
 permalink: /background
 ---
@@ -86,8 +86,8 @@ permalink: /background
     class Player extends GameObject {
       constructor(image, gameWorld) {
         // Scale player to half its original image size
-        const width = image.naturalWidth / 2;
-        const height = image.naturalHeight / 2;
+        const width = image.naturalWidth * 1.1;
+        const height = image.naturalHeight * 1.1;
         const x = (gameWorld.width - width) / 2; // Center horizontally
         const y = (gameWorld.height - height) / 2; // Center vertically
         super(image, width, height, x, y);
