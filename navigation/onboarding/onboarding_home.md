@@ -61,7 +61,7 @@ permalink: /onboarding/home
   padding: 32px 16px;
   box-sizing: border-box;
   text-align: center;
-  background-image: url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUydTF0YjdlYnFla3F4eHZzZnlvc2NrYWFuaDZ2amloNThsYWRwajYyaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26tn33aiTi1jkl6H6/source.gif');
+  background-image: "{{site.baseurl}}/images/onbarding/jscoding.gif";
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
