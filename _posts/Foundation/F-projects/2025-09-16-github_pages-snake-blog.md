@@ -45,7 +45,7 @@ We have made multiple quality-of-life improvements and bugfixes for Snake. Below
   - See the above image
 - Added two more game speeds
   - Honestly, the "Troll" and "Turtle" game modes were mainly just trolling. But if you're feeling daring, try to get a single apple at "Troll" speed with walls enabled >:)
-  
+- Improved the UI of the Game Over screen
 
 ### Here are our GitHub Issues:
 - #10: <https://github.com/CompSciTeam/student/issues/10>: Page Scrolling, add WASD controls

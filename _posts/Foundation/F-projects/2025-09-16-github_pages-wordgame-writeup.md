@@ -31,7 +31,17 @@ We have made multiple quality-of-life improvements and mechanic redesigns for th
   - Color changing done by: `const color = typedChar === promptChar ? 'green' : 'red';`
 
 - Cleaned up the "string length selection" menu
-  - Added custom CSS code to the menu
+  - Added custom CSS code to the menu to stylize it
+
+- Added a cursor
+  - It uses the current time to determine if it should be visible or not, creating a blinking effect
+
+### GitHub Issues
+- #11: [Add a progress bar](https://github.com/CompSciTeam/student/issues/11)
+- #24: [Stylize options menu](https://github.com/CompSciTeam/student/issues/24)
+- #22: [Add more possible strings](https://github.com/CompSciTeam/student/issues/22)
+- #23: [Typos make text unreadable](https://github.com/CompSciTeam/student/issues/23)
+- #12: [Experiment with different fonts, colors, and styles](https://github.com/CompSciTeam/student/issues/12)
 
 ## Play our word game at [compsciteam.github.io/student/wordgame](https://compsciteam.github.io/student/wordgame)!
 
