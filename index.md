@@ -62,19 +62,25 @@ hide: true
 <br>
 
 <a href="{{site.baseurl}}/background">
-    <img src="{{site.baseurl}}/images/index/background.png" alt="Snake">
+    <img src="{{site.baseurl}}/images/index/background.png" alt="Background">
 </a>
 
 <br>
 
 <a href="{{site.baseurl}}/turtle">
-    <img src="{{site.baseurl}}/images/index/turtle.png" alt="Snake">
+    <img src="{{site.baseurl}}/images/index/turtle.png" alt="Turtle">
 </a>
 
 <br>
 
 <a href="{{site.baseurl}}/calculator">
-    <img src="{{site.baseurl}}/images/index/calculator.png" alt="Snake">
+    <img src="{{site.baseurl}}/images/index/calculator.png" alt="Calculator">
+</a>
+
+<br>
+
+<a href="{{site.baseurl}}/wordgame">
+    <img src="{{site.baseurl}}/images/index/wordgame.png" alt="Word Game">
 </a>
 
 <br>
