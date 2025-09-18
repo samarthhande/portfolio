@@ -16,6 +16,14 @@ hide: true
     font-weight: 600
     }
 
+    .project-link {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .project-link:hover{
+        transform: scale(1.1);
+    }
+
 </style>
 
 <h2 class="glowing-text"><center> THE TINKERERS </center></h2>
@@ -69,32 +77,33 @@ hide: true
 </a>
 
 <a href="{{site.baseurl}}/snake">
-    <img src="{{site.baseurl}}/images/index/snake.png" alt="Snake">
+    <img src="{{site.baseurl}}/images/index/snake.png" alt="Snake" class="project-link">
 </a>
 
 <br>
 
 <a href="{{site.baseurl}}/background">
-    <img src="{{site.baseurl}}/images/index/background.png" alt="Background">
+    <img src="{{site.baseurl}}/images/index/background.png" alt="Background" class="project-link">
 </a>
 
 <br>
 
 <a href="{{site.baseurl}}/turtle">
-    <img src="{{site.baseurl}}/images/index/turtle.png" alt="Turtle">
+    <img src="{{site.baseurl}}/images/index/turtle.png" alt="Turtle" class="project-link">
 </a>
 
 <br>
 
 <a href="{{site.baseurl}}/calculator">
-    <img src="{{site.baseurl}}/images/index/calculator.png" alt="Calculator">
+    <img src="{{site.baseurl}}/images/index/calculator.png" alt="Calculator" class="project-link">
 </a>
 
 <br>
 
 <a href="{{site.baseurl}}/wordgame">
-    <img src="{{site.baseurl}}/images/index/wordgame.png" alt="Word Game">
+    <img src="{{site.baseurl}}/images/index/wordgame.png" alt="Word Game" class="project-link">
 </a>
+</div>
 
 <br>
 
