@@ -4,8 +4,21 @@ title: Our team
 hide: true
 ---
 
+<br>
 
-## <center> ⚙️ THE TINKERERS 🧑‍💻 </center>
+<style>
+    .glowing-text {
+    color: #fff; /* Set the text color to white or a light color for better contrast */
+    text-shadow: 0 0 10px #8a2be2, /* Purple glow */
+                0 0 20px #8a2be2, /* Deeper purple glow */
+                0 0 30px #4169e1, /* Blue glow */
+                0 0 40px #4169e1; /* Deeper blue glow */
+    font-weight: 600
+    }
+
+</style>
+
+<h2 class="glowing-text"><center> THE TINKERERS </center></h2>
 
 | Role                   | Name      | Repo Location                                 | Stream                | Repo Name |
 |------------------------|-----------|-----------------------------------------------|-----------------------|-----------|
@@ -52,7 +65,7 @@ hide: true
 -->
 
 <a href="{{site.baseurl}}/onboarding/home" class="button small" style="background-color: #6b4bd3ff">
-    Onboarding Adventure
+    <br><strong>Onboarding Adventure</strong><br>
 </a>
 
 <a href="{{site.baseurl}}/snake">
