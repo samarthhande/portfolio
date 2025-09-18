@@ -26,7 +26,7 @@ We have made multiple quality-of-life improvements and mechanic redesigns for th
 - Added a gradient progress bar to display your progress
   - We first wrote CSS for the bar itself, the fill of the bar, and the text for it
   - Then we inserted the below line:
-    <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div><div class="progress-text">0%</div></div>
+    `<div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div><div class="progress-text">0%</div></div>`
 
 - Game now handles accuracy and WPM differently:
   - The way it worked previously is that you had to have the word typed correctly at the end and fix any mistakes you made. The accuracy was just the number of mistakes you made.
