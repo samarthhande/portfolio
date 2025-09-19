@@ -61,7 +61,7 @@ permalink: /onboarding/home
   padding: 32px 16px;
   box-sizing: border-box;
   text-align: center;
-  background-image: "{{site.baseurl}}/images/onbarding/jscoding.gif";
+  background-image: url("{{ site.baseurl }}/images/onbarding/jscoding.gif");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
