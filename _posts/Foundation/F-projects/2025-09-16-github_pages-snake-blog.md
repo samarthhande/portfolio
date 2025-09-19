@@ -38,9 +38,8 @@ We have made multiple quality-of-life improvements and bugfixes for Snake. Below
 <details>
 <summary>Show code</summary>
 
-```html
-<p class="fs-4">Apples: <span id="score_value">0</span></p>
-```
+
+    <p class="fs-4">Apples: <span id="score_value">0</span></p>
 
 </details>
 
@@ -52,27 +51,26 @@ We have made multiple quality-of-life improvements and bugfixes for Snake. Below
 <details>
 <summary>Show code</summary>
 
-```js
-let changeDir = function(key){
-    switch(key) {
-        case 37: case 65: // left arrow / 'A'
-            if (snake_dir !== 1) snake_next_dir = 3;
-            break;
-        case 38: case 87: // up arrow / 'W'
-            if (snake_dir !== 2) snake_next_dir = 0;
-            break;
-        case 39: case 68: // right arrow / 'D'
-            if (snake_dir !== 3) snake_next_dir = 1;
-            break;
-        case 40: case 83: // down arrow / 'S'
-            if (snake_dir !== 0) snake_next_dir = 2;
-            break;
+    let changeDir = function(key){
+        switch(key) {
+            case 37: case 65: // left arrow / 'A'
+                if (snake_dir !== 1) snake_next_dir = 3;
+                break;
+            case 38: case 87: // up arrow / 'W'
+                if (snake_dir !== 2) snake_next_dir = 0;
+                break;
+            case 39: case 68: // right arrow / 'D'
+                if (snake_dir !== 3) snake_next_dir = 1;
+                break;
+            case 40: case 83: // down arrow / 'S'
+                if (snake_dir !== 0) snake_next_dir = 2;
+                break;
+        }
     }
-}
-canvas.onkeydown = function(evt) {
-    changeDir(evt.keyCode);
-}
-```
+    canvas.onkeydown = function(evt) {
+        changeDir(evt.keyCode);
+    }
+
 </details>
 
 <hr>
@@ -85,37 +83,37 @@ canvas.onkeydown = function(evt) {
 <details>
 <summary>Show code</summary>
 
-```js
-function applyMode(mode){
-    switch(mode){
-        case 'colorblind':
-            color_light_tile = '#ffd97a'; color_dark_tile  = '#ffd15a';
-            color_snake = '#0000ff'; color_apple = '#ff00ff';
-            break;
-        case 'light':
-            color_light_tile = '#f0f8e8'; color_dark_tile  = '#dfeccf';
-            color_snake = '#0b63d6'; color_apple = '#d32f2f';
-            break;
-        case 'dark':
-            color_light_tile = '#355a2b'; color_dark_tile  = '#243b1b';
-            color_snake = '#1e90ff'; color_apple = '#ff6b6b';
-            break;
-        default:
-            color_light_tile = '#a9d750'; color_dark_tile  = '#a2d148';
-            color_snake = '#2f00ffff'; color_apple = '#ff0000ff';
-    }
-    // repaint if playing
-    if(snake && snake.length){
-        for(let y = 0; y < canvas.height / BLOCK; y++) {
-            for(let x = 0; x < canvas.width / BLOCK; x++) {
-                ctx.fillStyle = ((x + y) % 2 === 0) ? color_light_tile : color_dark_tile;
-                ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
-            }
+    function applyMode(mode){
+        switch(mode){
+            case 'colorblind':
+                color_light_tile = '#ffd97a'; color_dark_tile  = '#ffd15a';
+                color_snake = '#0000ff'; color_apple = '#ff00ff';
+                break;
+            case 'light':
+                color_light_tile = '#f0f8e8'; color_dark_tile  = '#dfeccf';
+                color_snake = '#0b63d6'; color_apple = '#d32f2f';
+                break;
+            case 'dark':
+                color_light_tile = '#355a2b'; color_dark_tile  = '#243b1b';
+                color_snake = '#1e90ff'; color_apple = '#ff6b6b';
+                break;
+            default:
+                color_light_tile = '#a9d750'; color_dark_tile  = '#a2d148';
+                color_snake = '#2f00ffff'; color_apple = '#ff0000ff';
         }
-        for(let i = 0; i < snake.length; i++) activeDot(snake[i].x, snake[i].y);
-        activeApple(food.x, food.y);
+        // repaint if playing
+        if(snake && snake.length){
+            for(let y = 0; y < canvas.height / BLOCK; y++) {
+                for(let x = 0; x < canvas.width / BLOCK; x++) {
+                    ctx.fillStyle = ((x + y) % 2 === 0) ? color_light_tile : color_dark_tile;
+                    ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+                }
+            }
+            for(let i = 0; i < snake.length; i++) activeDot(snake[i].x, snake[i].y);
+            activeApple(food.x, food.y);
+        }
     }
-}
+
 </details>
 
 <hr>
@@ -127,12 +125,10 @@ function applyMode(mode){
 <details>
 <summary>Show code</summary>
 
-```js
-if(current_gamemode === 'candied'){
-    const newSpeed = Math.max(6, Number(snake_speed) - 5);
-    setSnakeSpeed(newSpeed);
-}
-```
+    if(current_gamemode === 'candied'){
+        const newSpeed = Math.max(6, Number(snake_speed) - 5);
+        setSnakeSpeed(newSpeed);
+    }
 
 </details>
 
@@ -142,30 +138,30 @@ if(current_gamemode === 'candied'){
 <details>
 <summary>Show code</summary>
 
-```js
-// Code to spawn golden fruit
-if(current_gamemode === 'fruit_frenzy' && Math.random() < 0.4 && !goldenFood.active){
-    let gx = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
-    let gy = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
-    goldenFood.x = gx; goldenFood.y = gy;
-    goldenFood.vx = (Math.random() < 0.5) ? 1 : -1;
-    goldenFood.vy = (Math.random() < 0.5) ? 1 : -1;
-    goldenFood.active = true;
-}
-```
 
-```js
-// Code to move the fruit
-// Move golden fruit each frame
-if(goldenFood.active){
-    let nextX = goldenFood.x + goldenFood.vx;
-    let nextY = goldenFood.y + goldenFood.vy;
-    if(nextX < 0 || nextX >= canvas.width / BLOCK) goldenFood.vx *= -1; // reverse vx and/or vy if needed
-    if(nextY < 0 || nextY >= canvas.height / BLOCK) goldenFood.vy *= -1;
-    goldenFood.x = nextX;
-    goldenFood.y = nextY;
-}
-```
+    // Code to spawn golden fruit
+    if(current_gamemode === 'fruit_frenzy' && Math.random() < 0.4 && !goldenFood.active){
+        let gx = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
+        let gy = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
+        goldenFood.x = gx; goldenFood.y = gy;
+        goldenFood.vx = (Math.random() < 0.5) ? 1 : -1;
+        goldenFood.vy = (Math.random() < 0.5) ? 1 : -1;
+        goldenFood.active = true;
+    }
+
+
+
+    // Code to move the fruit
+    // Move golden fruit each frame
+    if(goldenFood.active){
+        let nextX = goldenFood.x + goldenFood.vx;
+        let nextY = goldenFood.y + goldenFood.vy;
+        if(nextX < 0 || nextX >= canvas.width / BLOCK) goldenFood.vx *= -1; // reverse vx and/or vy if needed
+        if(nextY < 0 || nextY >= canvas.height / BLOCK) goldenFood.vy *= -1;
+        goldenFood.x = nextX;
+        goldenFood.y = nextY;
+    }
+
 
 </details>
 <hr>
@@ -175,16 +171,15 @@ if(goldenFood.active){
 <details>
 <summary>Show code</summary>
 
-```js
-let activeDot = function(x, y){
-    ctx.fillStyle = color_snake; // blue snake
-    ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
-}
-let activeApple = function(x, y){
-    ctx.fillStyle = color_apple; // red apple
-    ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
-}
-```
+    let activeDot = function(x, y){
+        ctx.fillStyle = color_snake; // blue snake
+        ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+    }
+    let activeApple = function(x, y){
+        ctx.fillStyle = color_apple; // red apple
+        ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+    }
+
 </details>
 
 <hr>
@@ -196,8 +191,7 @@ let activeApple = function(x, y){
 <details>
 <summary>Show code</summary>
 
-```css
-#setting input{ display:none; }
+    #setting input{ display:none; }
     #setting label{ cursor: pointer; }
     #setting input:checked + label{ background-color: #FFF; color: #000; }
 
@@ -256,7 +250,7 @@ let activeApple = function(x, y){
         .screen-card, .settings-card{ margin: 10px; padding: 14px; }
         canvas{ border-width: 4px; }
     }
-```
+
 </details>
 
 <hr>
@@ -268,20 +262,19 @@ let activeApple = function(x, y){
 <details>
 <summary>Show code</summary>
 
-```html
-<div class="option-row">
-    <input id="speed_turtle" type="radio" name="speed" value="220"/>
-    <label for="speed_turtle">Turtle</label>
-    <input id="speed1" type="radio" name="speed" value="120" checked/>
-    <label for="speed1">Slow</label>
-    <input id="speed2" type="radio" name="speed" value="75"/>
-    <label for="speed2">Normal</label>
-    <input id="speed3" type="radio" name="speed" value="35"/>
-    <label for="speed3">Fast</label>
-    <input id="speed_troll" type="radio" name="speed" value="8"/>
-    <label for="speed_troll">Troll</label>
-</div>
-```
+    <div class="option-row">
+        <input id="speed_turtle" type="radio" name="speed" value="220"/>
+        <label for="speed_turtle">Turtle</label>
+        <input id="speed1" type="radio" name="speed" value="120" checked/>
+        <label for="speed1">Slow</label>
+        <input id="speed2" type="radio" name="speed" value="75"/>
+        <label for="speed2">Normal</label>
+        <input id="speed3" type="radio" name="speed" value="35"/>
+        <label for="speed3">Fast</label>
+        <input id="speed_troll" type="radio" name="speed" value="8"/>
+        <label for="speed_troll">Troll</label>
+    </div>
+
 </details>
 
 <hr>
