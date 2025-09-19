@@ -246,17 +246,17 @@ let activeApple = function(x, y){
 <details>
 <summary>Show code</summary>
 <pre><code class="language-html">
-<div class="option-row">
-    <input id="speed_turtle" type="radio" name="speed" value="220"/>
-    <label for="speed_turtle">Turtle</label>
-    <input id="speed1" type="radio" name="speed" value="120" checked/>
-    <label for="speed1">Slow</label>
-    <input id="speed2" type="radio" name="speed" value="75"/>
-    <label for="speed2">Normal</label>
-    <input id="speed3" type="radio" name="speed" value="35"/>
-    <label for="speed3">Fast</label>
-    <input id="speed_troll" type="radio" name="speed" value="8"/>
-    <label for="speed_troll">Troll</label>
-</div>
+&lt;div class="option-row"&gt;
+    &lt;input id="speed_turtle" type="radio" name="speed" value="220"/&gt;
+    &lt;label for="speed_turtle"&gt;Turtle&lt;/label&gt;
+    &lt;input id="speed1" type="radio" name="speed" value="120" checked/&gt;
+    &lt;label for="speed1"&gt;Slow&lt;/label&gt;
+    &lt;input id="speed2" type="radio" name="speed" value="75"/&gt;
+    &lt;label for="speed2"&gt;Normal&lt;/label&gt;
+    &lt;input id="speed3" type="radio" name="speed" value="35"/&gt;
+    &lt;label for="speed3"&gt;Fast&lt;/label&gt;
+    &lt;input id="speed_troll" type="radio" name="speed" value="8"/&gt;
+    &lt;label for="speed_troll"&gt;Troll&lt;/label&gt;
+&lt;/div&gt;
 </code></pre>
 </details>
