@@ -32,16 +32,27 @@ Additionally, we make a new and improved settings screen:
 
 We have made multiple quality-of-life improvements and bugfixes for Snake. Below is a list of all the modifications we made.
 
-- Changed "Points: ___" to "Apples: ___"
+<hr>
 
-```
+**Changed "Points: ___" to "Apples: ___"**
+<details>
+<summary>Show code</summary>
+
+```html
 <p class="fs-4">Apples: <span id="score_value">0</span></p>
 ```
 
-- Added WASD controls
+</details>
+
+<hr>
+
+**Added WASD controls**
   - Arrow keys could cause the page to scroll up and down. Adding WASD controls allowed for increased user flexibility and prevents this scrolling issue.
 
-```
+<details>
+<summary>Show code</summary>
+
+```js
 let changeDir = function(key){
     switch(key) {
         case 37: case 65: // left arrow / 'A'
@@ -62,12 +73,19 @@ canvas.onkeydown = function(evt) {
     changeDir(evt.keyCode);
 }
 ```
+</details>
 
-- Changed background theme
+<hr>
+
+
+**Changed background theme**
   - The background is, by default, checkered light and dark green. We added different color schemes to add even more flexibility, including light theme, dark theme, and **colorblind** mode.
 
 
-```
+<details>
+<summary>Show code</summary>
+
+```js
 function applyMode(mode){
     switch(mode){
         case 'colorblind':
@@ -98,22 +116,33 @@ function applyMode(mode){
         activeApple(food.x, food.y);
     }
 }
-```
+</details>
+
+<hr>
 
 
-- Added two new game modes!
+**Added two new game modes!**
   - We called the first game mode "Candied Apples", where the snake exponentially speeds up every time it eats an apple.
 
-```
+<details>
+<summary>Show code</summary>
+
+```js
 if(current_gamemode === 'candied'){
     const newSpeed = Math.max(6, Number(snake_speed) - 5);
     setSnakeSpeed(newSpeed);
 }
 ```
 
-  - The second one is called "Fruit Frenzy", where a golden apple that bounces around can be eaten for 3 points. It has a 40% chance of spawning when you eat an apple.
+</details>
 
-```
+
+- The second game mode is called "Fruit Frenzy", where a golden apple that bounces around can be eaten for 3 points. It has a 40% chance of spawning when you eat an apple.
+
+<details>
+<summary>Show code</summary>
+
+```js
 // Code to spawn golden fruit
 if(current_gamemode === 'fruit_frenzy' && Math.random() < 0.4 && !goldenFood.active){
     let gx = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
@@ -125,7 +154,7 @@ if(current_gamemode === 'fruit_frenzy' && Math.random() < 0.4 && !goldenFood.act
 }
 ```
 
-```
+```js
 // Code to move the fruit
 // Move golden fruit each frame
 if(goldenFood.active){
@@ -138,9 +167,15 @@ if(goldenFood.active){
 }
 ```
 
-- We made the snake blue and the apple red
+</details>
+<hr>
 
-```
+**We made the snake blue and the apple red**
+
+<details>
+<summary>Show code</summary>
+
+```js
 let activeDot = function(x, y){
     ctx.fillStyle = color_snake; // blue snake
     ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
@@ -150,79 +185,90 @@ let activeApple = function(x, y){
     ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
 }
 ```
+</details>
 
-- Cleaned up the settings UI significantly :)
+<hr>
+
+
+**Cleaned up the settings UI significantly :)**
   - See the above image
 
+<details>
+<summary>Show code</summary>
+
+```css
+#setting input{ display:none; }
+    #setting label{ cursor: pointer; }
+    #setting input:checked + label{ background-color: #FFF; color: #000; }
+
+    #setting { 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+    .settings-card{
+        width: 100%;
+        max-width: 420px;
+        background: rgba(0,0,0,0.18);
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        text-align: left;
+    }
+    .settings-title{
+        font-size: 1.15rem;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #fff;
+    }
+    .setting-group{
+        margin: 12px 0;
+    }
+    .option-row{
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+
+    #setting input + label{
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.06);
+        color: #eaeaea;
+        border: 1px solid rgba(255,255,255,0.06);
+        transition: all 0.15s ease-in-out;
+        user-select: none;
+    }
+    #setting input:checked + label{
+        background-color: #fff;
+        color: #000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2) inset;
+        transform: translateY(-1px);
+    }
+    #setting p{ color: #f1f1f1; }
+    
+
+    @media (max-width: 520px){
+        .game-shell{ padding: 12px; border-radius: 10px; }
+        .screen-card, .settings-card{ margin: 10px; padding: 14px; }
+        canvas{ border-width: 4px; }
+    }
 ```
-`#screen_setting {
-    display: none;
-    padding: 20px;
-    text-align: left;
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-    width: 400px;
-    margin: 30px auto;
-}
+</details>
 
-#screen_setting h3 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-    color: #333;
-}
-
-#screen_setting label {
-    font-size: 1rem;
-    margin-right: 12px;
-    cursor: pointer;
-}
-
-#screen_setting input[type="radio"],
-#screen_setting input[type="checkbox"] {
-    margin-right: 6px;
-    cursor: pointer;
-}
-
-#screen_setting button {
-    background-color: #1e90ff;
-    color: white;
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 15px;
-}
-
-#screen_setting button:hover {
-    background-color: #63b3ff;
-    transform: scale(1.05);
-}
-
-.settings-options {
-    margin-bottom: 20px;
-}
-
-input:checked + label {
-    font-weight: bold;
-    color: #1e90ff;
-}
-
-#screen_setting .gamemode-note {
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 4px;
-}
-```
+<hr>
 
 
-- Added two more game speeds
+**Added two more game speeds**
   - Honestly, the "Troll" and "Turtle" game modes were mainly just trolling. But if you're feeling daring, try to get a single apple at "Troll" speed with walls enabled >:)
 
-```
+<details>
+<summary>Show code</summary>
+
+```html
 <div class="option-row">
     <input id="speed_turtle" type="radio" name="speed" value="220"/>
     <label for="speed_turtle">Turtle</label>
@@ -236,8 +282,12 @@ input:checked + label {
     <label for="speed_troll">Troll</label>
 </div>
 ```
+</details>
 
-- Improved the UI of the Game Over screen
+<hr>
+
+
+**Improved the UI of the Game Over screen**
   - Added an image:
 
 ![Alt text]({{site.baseurl}}/images/hacks/snake-gameover.png "snake-gameover.png")
