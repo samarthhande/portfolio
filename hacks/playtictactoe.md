@@ -6,7 +6,7 @@ permalink: /tictactoe/
 
 <center><h2>Tic Tac Toe</h2>
 
-View the writeup at <a href="https://compsciteam.github.io/tictactoe/writeup">compsciteam.github.io/tictactoe/writeup</a>.
+View the writeup at <a href="https://compsciteam.github.io/student/tictactoe/writeup">compsciteam.github.io/student/tictactoe/writeup</a>.
 
 <br><hr>
 
