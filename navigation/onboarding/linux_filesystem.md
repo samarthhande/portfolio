@@ -89,6 +89,51 @@ cat hello.txt
       <div style="height:0; overflow:visible; position:relative;"></div>
     </div>
 
+    <!-- Mini-quiz step -->
+    <div class="step" data-step="6">
+      <h3>Mini quiz — check your knowledge</h3>
+      <div class="lesson">
+        <p class="small">Answer the short multiple-choice quiz. Your score will appear after you submit and correct answers will be revealed.</p>
+
+        <form id="linux-quiz" class="small" style="display:flex;flex-direction:column;gap:10px;">
+          <div>
+            <strong>1.</strong> Which directory typically contains system-wide configuration files?
+            <div><label><input type="radio" name="q1" value="/etc"> /etc</label></div>
+            <div><label><input type="radio" name="q1" value="/home"> /home</label></div>
+            <div><label><input type="radio" name="q1" value="/dev"> /dev</label></div>
+          </div>
+
+          <div>
+            <strong>2.</strong> Which command shows the current working directory?
+            <div><label><input type="radio" name="q2" value="pwd"> pwd</label></div>
+            <div><label><input type="radio" name="q2" value="ls"> ls</label></div>
+            <div><label><input type="radio" name="q2" value="cd"> cd</label></div>
+          </div>
+
+          <div>
+            <strong>3.</strong> The command to create nested directories in one step is:
+            <div><label><input type="radio" name="q3" value="mkdir -p"> mkdir -p</label></div>
+            <div><label><input type="radio" name="q3" value="touch -r"> touch -r</label></div>
+            <div><label><input type="radio" name="q3" value="cp -r"> cp -r</label></div>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:6px;align-items:center;">
+            <button type="button" class="arrow" id="submit-quiz">Submit</button>
+            <div id="quiz-result" class="small" aria-live="polite"></div>
+          </div>
+
+          <details id="quiz-answers" style="margin-top:8px;">
+            <summary class="small">Show correct answers</summary>
+            <ol class="small">
+              <li><code>/etc</code> — system-wide configuration files</li>
+              <li><code>pwd</code> — print working directory</li>
+              <li><code>mkdir -p</code> — create parent directories as needed</li>
+            </ol>
+          </details>
+        </form>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -168,6 +213,32 @@ cat hello.txt
       setTimeout(()=> copyBtn.textContent = 'Copy command', 1200);
     });
   });
+
+  // Quiz grading logic (for the mini-quiz step)
+  const submitQuiz = document.getElementById('submit-quiz');
+  const quizResult = document.getElementById('quiz-result');
+  const quizForm = document.getElementById('linux-quiz');
+  const quizAnswers = { q1: '/etc', q2: 'pwd', q3: 'mkdir -p' };
+
+  function gradeQuiz(){
+    if(!quizForm) return;
+    const form = new FormData(quizForm);
+    let score = 0; let total = 0; let missing = false;
+    Object.keys(quizAnswers).forEach(k => {
+      total += 1;
+      const val = form.get(k);
+      if(!val) missing = true;
+      if(val === quizAnswers[k]) score += 1;
+    });
+    if(missing){ quizResult.textContent = 'Please answer all questions.'; quizResult.style.color = '#e09'; return; }
+    quizResult.textContent = `Score: ${score} / ${total}`;
+    quizResult.style.color = score === total ? '#2ea44f' : '#ffd166';
+    // open the details to show correct answers so learners can review
+    const det = document.getElementById('quiz-answers');
+    if(det && !det.open) det.open = true;
+  }
+
+  if(submitQuiz){ submitQuiz.addEventListener('click', gradeQuiz); }
 
   // initialize
   show(0);
