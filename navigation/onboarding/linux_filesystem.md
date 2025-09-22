@@ -15,7 +15,7 @@ permalink: /onboarding/linux-filesystem
 .controls { display:flex; gap:8px; align-items:center }
 .arrow { background: #ffffff; color: #0b1220; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-weight: 600; }
 .copy-btn { background: #ffffff; color: #0b1220; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-weight: 600; margin-left:8px; }
-.lesson { background: linear-gradient(180deg,#071127,#0e2946); padding:12px; border-radius:8px; color:#e6eef8 }
+.lesson { background: linear-gradient(180deg,#071127,#0e2946); padding:12px; border-radius:8px; color:#e6eef8; overflow:auto; }
 .small { font-size:0.95rem; color:#cbd5e1 }
 </style>
 
