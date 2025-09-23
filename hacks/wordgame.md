@@ -81,16 +81,29 @@ Writeup
 
 
     function drawText(text) {
-        wordCtx.clearRect(0, 0, wordCanvas.width, wordCanvas.height);
+        // Prepare font and measure wrapped lines
         wordCtx.font = '24px "Times New Roman", Times, serif';
-        wordCtx.fillStyle = '#dededeff';
-        wordCtx.textAlign = 'center';
-    
         const maxWidth = wordCanvas.width - 20; // Leave some padding
         const lineHeight = 30; // Line height for wrapped text
         const lines = wrapText(text, maxWidth);
-    
-        const startY = (wordCanvas.height - lines.length * lineHeight) / 2; // Center vertically
+
+        // Ensure the canvas is tall enough to display all lines (plus padding)
+        const padding = 20; // top+bottom padding combined
+        const neededHeight = Math.max(200, lines.length * lineHeight + padding);
+        if (wordCanvas.height !== neededHeight) {
+            wordCanvas.height = neededHeight;
+            // After resizing canvas, drawing state resets — reapply styles
+            wordCtx.font = '24px "Times New Roman", Times, serif';
+            wordCtx.fillStyle = '#dededeff';
+            wordCtx.textAlign = 'center';
+        } else {
+            wordCtx.clearRect(0, 0, wordCanvas.width, wordCanvas.height);
+            wordCtx.fillStyle = '#dededeff';
+            wordCtx.textAlign = 'center';
+        }
+
+        // Draw lines starting from the top-padding so the beginning of the text is visible
+        const startY = padding / 2 + lineHeight / 2;
         lines.forEach((line, index) => {
             wordCtx.fillText(line, wordCanvas.width / 2, startY + index * lineHeight);
         });
@@ -116,16 +129,26 @@ Writeup
     }
 
     function drawUserText(prompt, input) {
-        wordCtx.clearRect(0, 0, wordCanvas.width, wordCanvas.height);
+        // Prepare font and wrapped lines
         wordCtx.font = '24px "Times New Roman", Times, serif';
         wordCtx.textAlign = 'left';
-    
+
         const maxWidth = wordCanvas.width - 20; // Leave enough padding
         const lineHeight = 30; // Line height for wrapped text
         const lines = wrapText(prompt, maxWidth);
-    
-        const startY = (wordCanvas.height - lines.length * lineHeight) / 2; // Center vertically
-    
+
+        // Ensure canvas tall enough (in case prompt changed)
+        const padding = 20;
+        const neededHeight = Math.max(200, lines.length * lineHeight + padding);
+        if (wordCanvas.height !== neededHeight) {
+            wordCanvas.height = neededHeight;
+            // Reapply drawing state after resize
+            wordCtx.font = '24px "Times New Roman", Times, serif';
+            wordCtx.textAlign = 'left';
+        }
+
+        const startY = padding / 2 + lineHeight / 2; // Start from top padding
+
         // Draw the prompt text line by line
         lines.forEach((line, lineIndex) => {
             const lineY = startY + lineIndex * lineHeight;
