@@ -15,22 +15,7 @@ permalink: /onboarding/linux-filesystem
 .controls { display:flex; gap:8px; align-items:center }
 .arrow { background: #ffffff; color: #0b1220; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-weight: 600; }
 .copy-btn { background: #ffffff; color: #0b1220; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-weight: 600; margin-left:8px; }
-.lesson { background: linear-gradient(180deg,#071127,#0e2946); padding:12px; border-radius:8px; color:#e6eef8; overflow:visible; min-height:220px; transition: all 160ms ease; }
-/* Fullscreen / expanded lesson mode: covers most of the viewport so the box appears to "fill the page".
-   Uses position:fixed to overlay the page and shows its own scrollbar if content exceeds viewport. */
-.lesson.fullscreen {
-  position: fixed;
-  left: 28px;
-  right: 28px;
-  top: 72px;
-  bottom: 36px;
-  z-index: 1200;
-  padding: 20px;
-  border-radius: 10px;
-  overflow: auto; /* allow scrolling inside only when content exceeds viewport */
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-}
-.lesson .lesson-controls { display:flex; justify-content:flex-end; gap:8px; margin-bottom:8px; }
+.lesson { background: linear-gradient(180deg,#071127,#0e2946); padding:12px; border-radius:8px; color:#e6eef8; overflow:visible; padding-bottom:12px; display:block; }
 .small { font-size:0.95rem; color:#cbd5e1 }
 </style>
 
@@ -65,7 +50,7 @@ permalink: /onboarding/linux-filesystem
     <div class="step" data-step="3">
       <h3>3. Files and folders — "everything is a file"</h3>
       <div class="lesson">
-        <p class="small">In Linux, files, directories (folders), devices, and even some system interfaces are represented as files. This unified model makes tools simple and composable: you read, write, and pipe data between programs and files.</p>
+        <p class="small">In Linux, files, directories (folders), devices, and even some system interfaces are represented as files. This unified model makes tools simple and composable: you read, write, and pipe data between programs and files.</p><br><br>
         <p class="small">Examples: configuration files are plain text under <code>/etc</code>, user files live in <code>/home/&lt;user&gt;</code>, and device interfaces appear under <code>/dev</code>.</p>
       </div>
     </div>
@@ -108,9 +93,6 @@ cat hello.txt
     <div class="step" data-step="6">
       <h3>Mini quiz — check your knowledge</h3>
       <div class="lesson">
-        <div class="lesson-controls">
-          <button type="button" class="copy-btn" id="toggle-expand" aria-pressed="false">Expand</button>
-        </div>
         <p class="small">Answer the short multiple-choice quiz. Your score will appear after you submit and correct answers will be revealed.</p>
 
         <form id="linux-quiz" class="small" style="display:flex;flex-direction:column;gap:10px;">
@@ -258,18 +240,6 @@ cat hello.txt
 
   if(submitQuiz){ submitQuiz.addEventListener('click', gradeQuiz); }
 
-  // Expand / collapse lesson full-screen toggle
-  const toggleExpand = document.getElementById('toggle-expand');
-  const quizLesson = document.querySelector('.step[data-step="6"] .lesson');
-  if(toggleExpand && quizLesson){
-    toggleExpand.addEventListener('click', ()=>{
-      const isFull = quizLesson.classList.toggle('fullscreen');
-      toggleExpand.textContent = isFull ? 'Collapse' : 'Expand';
-      toggleExpand.setAttribute('aria-pressed', isFull ? 'true' : 'false');
-      // when expanded, ensure it's visible in viewport
-      if(isFull) quizLesson.focus();
-    });
-  }
 
   // initialize
   show(0);
