@@ -72,34 +72,21 @@ Writeup
     let currentPrompt = ""; // the active prompt text for redraws
     let caretInterval = null; // interval id for caret redraws
 
-    const short_strings = ["The quick brown fox jumps over the lazy dog", "Pack my box with five dozen liquor jugs", "How quickly daft jumping zebras vex", "Jinxed wizards pluck ivy from the quilt", "Bright vixens jump dozy fowl quack", "Sphinx of black quartz judge my vow", "Two driven jocks help fax my big quiz", "Five quacking zephyrs jolt my wax bed", "The five boxing wizards jump quickly", "Jackdaws love my big sphinx of quartz", "Quick zephyrs blow vexing daft Jim", "Zany gnomes fix blighted quartz vases", "Bold foxes jump quickly past the lazy hound", "Mix two dozen plums with five ripe figs"];
+    const short_strings = ["The quick brown fox jumps over the lazy dog", "Pack my box with five dozen liquor jugs", "How quickly daft jumping zebras vex", "Jinxed wizards pluck ivy from the quilt", "Bright vixens jump dozy fowl quack", "Sphinx of black quartz judge my vow", "Two driven jocks help fax my big quiz", "Five quacking zephyrs jolt my wax bed", "The five boxing wizards jump quickly", "Jackdaws love my big sphinx of quartz", "Quick zephyrs blow vexing daft Jim", "Zany gnomes fix blighted quartz vases", "Bold foxes jump quickly past the lazy hound", "Mix two dozen plums with five ripe figs", "Anish is the GOAT"];
     const medium_strings = ["Amazingly few discotheques provide jukeboxes", "Back in June we delivered oxygen equipment of the same size", "The public was amazed to view the quickness and dexterity of the juggler", "Jovial zanies quickly gave up their quest for the exotic fish", "The wizard quickly jinxed the gnomes before they vaporized", "All questions asked by five watched experts amaze the judge", "The job requires extra pluck and zeal from every young wage earner", "Crazy Frederick bought many very exquisite opal jewels", "We promptly judged antique ivory buckles for the next prize", "Sixty zippers were quickly picked from the woven jute bag", "The boxed wizards quickly zap a smiling gnome", "A quick movement of the enemy will jeopardize six gunboats", "Mixing jellied plums with zesty lemon makes a fine tart", "The eccentric juggler amazed crowds with odd feats of dexterity", "A dozen movers quickly packed heavy boxes into the van"];
     const long_strings = ["The wizard quickly jinxed the gnomes before they vaporized just beyond the village gates", "Heavy boxes perform quick waltzes and jigs while the young fox plays his fiddle nearby", "My faxed joke won a pager in the cable TV quiz show making everyone in the room laugh", "Back in the quaint valley jovial hikers mixed exotic fruit juice and warm bread by the campfire", "The public was amazed to view the quickness and dexterity of the juggler as he performed his tricks", "Amazingly few discotheques provide jukeboxes making it hard for music lovers to enjoy their favorite tunes", "We promptly judged antique ivory buckles for the next prize in the competition impressing all the judges", "Crazy Frederick bought many very exquisite opal jewels from the ancient market in the old town square", "Sixty zippers were quickly picked from the woven jute bag by the skilled tailor in the bustling city", "Back in June we delivered oxygen equipment of the same size and shape to all the hospitals in the region", "In the sleepy coastal town the fishermen mended their nets beneath a crimson sunset while gulls wheeled overhead", "Under a canopy of stars the traveling minstrel strummed his lute and told tales of distant lands to eager listeners", "During the harvest festival the village square filled with laughter as families shared spiced bread and warm cider by the bonfire", "A curious apprentice studied ancient tomes in the candlelit library dreaming of spells that might mend broken things", "Across the prairie the herd thundering past left clouds of dust and the sun glinted on a thousand tiny hooves"];
 
     function drawText(text) {
-        // Prepare font and measure wrapped lines
+        wordCtx.clearRect(0, 0, wordCanvas.width, wordCanvas.height);
         wordCtx.font = '24px "Times New Roman", Times, serif';
+        wordCtx.fillStyle = '#dededeff';
+        wordCtx.textAlign = 'center';
+    
         const maxWidth = wordCanvas.width - 20; // Leave some padding
         const lineHeight = 30; // Line height for wrapped text
         const lines = wrapText(text, maxWidth);
-
-        // Ensure the canvas is tall enough to display all lines (plus padding)
-        const padding = 20; // top+bottom padding combined
-        const neededHeight = Math.max(200, lines.length * lineHeight + padding);
-        if (wordCanvas.height !== neededHeight) {
-            wordCanvas.height = neededHeight;
-            // After resizing canvas, drawing state resets — reapply styles
-            wordCtx.font = '24px "Times New Roman", Times, serif';
-            wordCtx.fillStyle = '#dededeff';
-            wordCtx.textAlign = 'center';
-        } else {
-            wordCtx.clearRect(0, 0, wordCanvas.width, wordCanvas.height);
-            wordCtx.fillStyle = '#dededeff';
-            wordCtx.textAlign = 'center';
-        }
-
-        // Draw lines starting from the top-padding so the beginning of the text is visible
-        const startY = padding / 2 + lineHeight / 2;
+    
+        const startY = (wordCanvas.height - lines.length * lineHeight) / 2; // Center vertically
         lines.forEach((line, index) => {
             wordCtx.fillText(line, wordCanvas.width / 2, startY + index * lineHeight);
         });
@@ -125,26 +112,16 @@ Writeup
     }
 
     function drawUserText(prompt, input) {
-        // Prepare font and wrapped lines
+        wordCtx.clearRect(0, 0, wordCanvas.width, wordCanvas.height);
         wordCtx.font = '24px "Times New Roman", Times, serif';
         wordCtx.textAlign = 'left';
-
+    
         const maxWidth = wordCanvas.width - 20; // Leave enough padding
         const lineHeight = 30; // Line height for wrapped text
         const lines = wrapText(prompt, maxWidth);
-
-        // Ensure canvas tall enough (in case prompt changed)
-        const padding = 20;
-        const neededHeight = Math.max(200, lines.length * lineHeight + padding);
-        if (wordCanvas.height !== neededHeight) {
-            wordCanvas.height = neededHeight;
-            // Reapply drawing state after resize
-            wordCtx.font = '24px "Times New Roman", Times, serif';
-            wordCtx.textAlign = 'left';
-        }
-
-        const startY = padding / 2 + lineHeight / 2; // Start from top padding
-
+    
+        const startY = (wordCanvas.height - lines.length * lineHeight) / 2; // Center vertically
+    
         // Draw the prompt text line by line
         lines.forEach((line, lineIndex) => {
             const lineY = startY + lineIndex * lineHeight;
