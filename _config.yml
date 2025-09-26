@@ -1,9 +1,9 @@
 title: Open Coding 
 description: "Class of 2029"
-owner_name: Anish Gupta
-github_username: neur0n-7 
-github_repo: "student" 
-baseurl: "/student" 
+owner_name: Samarth Hande
+github_username: samarthhande 
+github_repo: "portfolio" 
+baseurl: "/portfolio" 
 future: true
 remote_theme: jekyll/minima
 minima:
