@@ -11,7 +11,53 @@ layout: post
                      0 0 40px #4169e1; /* Deeper blue glow */
         font-weight: bold;
     }
+
+        /* Container that floats on top of your existing layout */
+    .frosty-overlay {
+        position: fixed;
+        inset: 0;
+        pointer-events: none; /* Let clicks pass through */
+        overflow: hidden;
+        z-index: 1; /* Place it above background, below UI/text */
+    }
+
+    .symbol {
+        position: absolute;
+        font-size: clamp(2rem, 5vw, 6rem);
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.08);
+        text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 25px rgba(200, 220, 255, 0.2);
+        filter: blur(1px);
+        user-select: none;
+        animation: float 18s linear infinite;
+    }
+
+    @keyframes float {
+        0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+        }
+        10% {
+        opacity: 1;
+        }
+        90% {
+        opacity: 1;
+        }
+        100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+        }
+    }
 </style>
+
+<div class="frosty-overlay">
+<div class="symbol" style="left:5%;  animation-delay:0s;">&lt;/&gt;</div>
+<div class="symbol" style="left:25%; animation-delay:4s;">&lt;/&gt;</div>
+<div class="symbol" style="left:55%; animation-delay:9s;">&lt;/&gt;</div>
+<div class="symbol" style="left:75%; animation-delay:14s;">&lt;/&gt;</div>
+</div>
 
 <h2>Credits</h2>
 <p>Created by Samarth Hande</p>
