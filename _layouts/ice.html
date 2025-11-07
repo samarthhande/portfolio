@@ -2,6 +2,11 @@
 layout: post 
 ---
 
+<!--
+This theme was created by Samarth Hande
+This theme is currently maintained by Samarth Hande
+-->
+
 <style>
     h2 {
         color: #fff; /* Set the text color to white or a light color for better contrast */
@@ -60,6 +65,10 @@ layout: post
 </div>
 
 <h2>Credits</h2>
-<p>Created by {{ page.credit }}</p>
+{% if page.projecttype == "grp" %}
+  <p>Created by {{ page.credit | default: "the Tinkerers" }}.</p>
+{% else %}
+  <p>Created by {{ page.credit | default: "Samarth Hande" }}.</p>
+{% endif %}
 
 {{ content }}
